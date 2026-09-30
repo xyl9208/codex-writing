@@ -1,0 +1,19 @@
+{
+ "TAAD_consensus_6": 1917,
+ "TAAD_consensus_7_with_GSE190635": 796,
+ "intersection": 795,
+ "retention_of_6": 0.41471048513302033,
+ "rho_lfc_6_vs_7": 0.9871706473511999,
+ "classes_with_GSE190635": {
+  "none": 10224,
+  "TAAD_only_undetermined": 588,
+  "TAAD_enriched_equivATAA": 133,
+  "ATAA_only_undetermined": 114,
+  "TAAD_enriched": 29,
+  "ATAA_enriched": 17,
+  "ATAA_enriched_equivTAAD": 16,
+  "shared_concordant": 14,
+  "discordant": 2
+ },
+ "median_I2_deg_7": 72.29844698786931
+}
