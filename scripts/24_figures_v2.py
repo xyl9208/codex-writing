@@ -5,7 +5,7 @@ Fig 2  Tier 1 programmes in bulk cohorts (per-cohort and pooled effects; module 
 Fig 3  patient-level programme scores within cell types (scRNA-seq)
 Fig 4  stage (GSE222318 within-cohort stages, estimation only; GSE189795 acute external replicate)
 Fig 5  within-patient region (GSE140947), medial layer (GSE318877) and ordered dilatation (GSE26155)
-Fig 6  programme organisation: C x I plane of all datasets and state comparison (no arrows)
+Fig 6  programme organisation: (a) Hedges' g of C vs I per dataset (no R inference: different SDs), (b) within-dataset mean differences on the score scale with delta-R iso-lines, (c) state comparison table (no arrows)
 FigS   Tier 2 fold-internal evaluation; composition-conditioned sensitivity (all modules)
 """
 import os, json, numpy as np, pandas as pd
