@@ -1,0 +1,593 @@
+[
+ {
+  "acc": "GSE182609",
+  "title": "Cardiogenic Shock Patients under Extracorporeal Membrane Oxygenation",
+  "n": 160,
+  "gpl": "14951;13534",
+  "type": "Expression profiling by array; Methylation profiling by genome tiling array",
+  "date": "2024/10/15",
+  "summary": "This SuperSeries is composed of the SubSeries listed below.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE26155",
+  "title": "Advanced Study of Aortic Pathology (ASAP)",
+  "n": 96,
+  "gpl": "5175",
+  "type": "Expression profiling by array",
+  "date": "2016/01/15",
+  "summary": "BACKGROUND: The vast majority of thoracic aortic aneurysms (TAAs) are observed either together with a bicuspid aortic valve (BAV), a common congenital disorder, or in idiopathic cases such as patients with a normal tricuspid aortic valve (TAV). The main objective of our study was to identify shared and unique gene expression properties underlying the aortic dilation of BAV and TAV patients. METHOD",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE182600",
+  "title": "Gene Expression of Cardiogenic Shock Patients under Extracorporeal Membrane Oxygenation",
+  "n": 78,
+  "gpl": "14951",
+  "type": "Expression profiling by array",
+  "date": "2024/10/15",
+  "summary": "Prognosis for cardiogenic shock patients under ECMO was our study goal. Success defined as survived more than 7 days after ECMO installation and failure died or had multiple organ failure in 7 days. Total 34 cases were enrolled, 17 success and 17 failure. Peripheral blood mononuclear cells collected at ECMO installation 0hr, 2hr and removal were used analyzed.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE318877",
+  "title": "Micro-regional bulk RNA sequencing data obtained from human thoracic aorta",
+  "n": 70,
+  "gpl": "30173",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2026/04/30",
+  "summary": "Capturing gene expression changes within the aortic wall is critical for understanding the pathogenesis of aortic diseases. To investigate gene expression alterations associated with disease progression in the human aortic media, we performed micro-regional RNA sequencing analysis.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE235161",
+  "title": "Mitochondrial NAD+ deficiency in vascular smooth muscle impairs collagen III turnover to trigger thoracic and abdominal aortic aneurysm",
+  "n": 42,
+  "gpl": "23227",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2024/11/19",
+  "summary": "Thoracic and abdominal aortic aneurysm poses a substantial mortality risk in adults, yet many of its underlying factors remain unidentified. Here, we identify mitochondrial nicotinamide adenine dinucleotide (NAD)\u207a deficiency as a causal factor for the development of aortic aneurysm. Multiomics analysis of 150 surgical aortic specimens indicated impaired NAD+ salvage and mitochondrial transport in ",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE224526",
+  "title": "CD4 T cells in Giant Cell Arteritis (RNA-Seq)",
+  "n": 42,
+  "gpl": "20301",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2023/09/08",
+  "summary": "CD4 T cells are important in GCA",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE154548",
+  "title": "Transcriptomic profiles of advanced colorectal adenomas from 40 Korean patients",
+  "n": 40,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2023/08/07",
+  "summary": "We report the RNA-seq data of 40 advanced colorectal adenoma patients form Dongguk University Ilsan International Hospital. The polyps with a diameter of 1cm or greater were regarded as advenced colorectal adenoma and obtained through colonoscopy. The data consist of 22 tublar adenoma, 6 tublovillous adenoma, 5 sessile serrated adenoma/polyp, 1 traditional serrated adenoma, intramucosal adenocarci",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE314672",
+  "title": "Role of Pdk4 in BAPN-induecd aortic dissection in mouse models",
+  "n": 39,
+  "gpl": "24676;24247",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2026/03/27",
+  "summary": "Thoracic aortic dissection (TAD) is a life-threatening acute vascular condition with extremely high morbidity and mortality. Endothelial cells (ECs) are critical for maintaining vascular homeostasis, yet the role of Endothelial-to-Mesenchymal Transition (EndoMT)\u2014a key cell fate process in vascular development and disease\u2014in TAD remains poorly defined. Furthermore, the functional significance of En",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE93101",
+  "title": "Molecular Prognosis of Cardiogenic Shock Patients under Extracorporeal Membrane Oxygenation",
+  "n": 33,
+  "gpl": "14951",
+  "type": "Expression profiling by array",
+  "date": "2019/12/31",
+  "summary": "Prognosis for cardiogenic shock patients under ECMO was our study goal. Success defined as survived more than 7 days after ECMO installation and failure died or had multiple organ failure in 7 days. Total 34 cases were enrolled, 17 success and 17 failure. Peripheral blood mononuclear cells collected at ECMO installation were used analyzed.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE128101",
+  "title": "Subcellular pathways shared by afflicted patients and mutant mice identify a new drug treatment for aortic aneurysm in Marfan syndrome",
+  "n": 25,
+  "gpl": "20301;21103",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2019/11/18",
+  "summary": "We analyzed differentially expressed genes in smooth muscle cells derived from the thoracic aorta of Marfan Syndrome (MFS) patients and control subjects to identify cell biological mechanisms contributing to thoracic aoritc aneurysm (TAA) development and rupture. These mechanisms were used to identify a potential drug treatment to mitigate TAA progression. We analyzed differentially expressed gene",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE5180",
+  "title": "Gene expression in aortic aneurysms associated with tricuspid and bicuspid valves",
+  "n": 25,
+  "gpl": "96",
+  "type": "Expression profiling by array",
+  "date": "2007/06/28",
+  "summary": "Patients with bicuspid aortic valve (BAV) have increased risk of thoracic ascending aortic aneurysm (AscAA) and dissection compared to those with a normal tricuspid aortic valve (TAV). The present study was undertaken to evaluate whether differences in gene expression exist in aortas from BAV and TAV patients with AscAA. Keywords: disease state analysis",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE98770",
+  "title": "Gene expression profiling of acute type A aortic dissection combined with in vitro assessment",
+  "n": 22,
+  "gpl": "14550;17660",
+  "type": "Expression profiling by array; Non-coding RNA profiling by array",
+  "date": "2017/05/17",
+  "summary": "Chronic inflammation characterized by MMP-TIMP dysregulation, increased VEGFA expression, and TGF-\u03b2 signaling in the development of aortic dissection.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE186844",
+  "title": "The Circulating Exosomal Long RNAs Expression Reveals T Cell Mediated Inflammatory Response and The Potential Clinical Value Analysis in Ischemic Stroke",
+  "n": 21,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2024/08/01",
+  "summary": "This was a case-control study conducted from August 2020 to January 2021, in which 9 ischemic stroke and 2 healthy individuals (healthy control group) attending the Guangdong Provincial People's Hospital were recruited for plasma exoLRs sequencing. The other 10 normal samples from a previous study published in the Gene Expression Omnibu (GEO) database (Accession No. GSE159657) were used as part of",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE153434",
+  "title": "Exaggerated autophagy as molecular characterization of Stanford type A aortic dissection: A transcriptome analysis of human ascending aortic tissues",
+  "n": 20,
+  "gpl": "20795",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2020/07/02",
+  "summary": "Purpose: The aim of this study is to have a fullscape of  molecular pathology of Stanford type A aortic dissection Methods: All TAAD patients under consideration underwent an ascending aortic replacement surgery during a cardiopulmonary bypass. The normal ascending aortic tissue samples were obtained from patients undergoing coronary artery bypass grafting surgery (CABG) without any aortic disease",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE337220",
+  "title": "Impaired mechanotransduction in second heart field-derived smooth muscle cells causes NOTCH1 haploinsufficiency-associated aortopathy",
+  "n": 18,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2026/07/17",
+  "summary": "Ascending aortic aneurysms (AscAA) are associated with aortic dissection/rupture and arise from genetic, developmental or biomechanical etiologies. NOTCH1 pathogenic variation is associated with AscAA found with congenital heart defects, such as bicuspid aortic valve and tetralogy of Fallot. This study sought to characterize a Notch1 haploinsufficient murine model of AscAA and investigate mechanis",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE314998",
+  "title": "The effects of different lesions on the downstream signaling mechanisms of vascular cells.",
+  "n": 18,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2026/04/20",
+  "summary": "In order to investigate the influence of clinical pathological conditions on the downstream signaling mechanism, we analyzed the activation status of the vascular tissue signaling pathways under different pathological conditions.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE272018",
+  "title": "BRD4770 functions as a novel ferroptosis inhibitor to protect against aortic dissection",
+  "n": 15,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2024/07/16",
+  "summary": "Smooth muscle cell (SMC) loss is the characteristic feature in the pathogenesis of aortic dissection (AD), and ferroptosis is a novel iron-dependent regulated cell death driven by the excessive lipid peroxidation accumula_x0002_tion. However, whether targeting ferroptosis is an effective approach for SMC loss and AD treatment remains unclear. Here, we found that the iron level, ferroptosis-related",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE219204",
+  "title": "Expression data from control, aortic aneurysm, and aortic dissection cells",
+  "n": 15,
+  "gpl": "24539",
+  "type": "Expression profiling by array",
+  "date": "2022/12/02",
+  "summary": "Aneurysmatic and dissection cells show a specific alteration of gene expression, which allow a disease specific distinction. We used microarrays to analyse the cellular gene expression of controls, thoracic aortic aneurysm, and aortic dissection.",
+  "hits": [
+   "aneurysm",
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE267434",
+  "title": "Investigation of common genes and regulatory mechanisms of hyperlipidemia and aortic dissection",
+  "n": 14,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2025/05/16",
+  "summary": "This study aimed to elucidate the common genes and regulatory mechanisms underlying hyperlipidemia and aortic dissection.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE222318",
+  "title": "Temporal-specific single-cell atlas of human type A aortic dissection",
+  "n": 14,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2023/12/15",
+  "summary": "Stanford type A aortic dissection (STAAD) is an aortic degenerative remodeling disease carrying an exceedingly high mortality worldwide. The irreversible weakening, dilatation and dissection of the ascending aorta contributes to circulatory failure and premature death. Dissections manifest distinct patterns in both clinical presentations and histophathological features during disease temporal tran",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE145903",
+  "title": "Inhibition of the multifunctional homeodomain-interacting protein kinase 2 (HIPK2) alleviates thoracic aortic disease in mice with progressively severe Marfan syndrome",
+  "n": 14,
+  "gpl": "21103;20301",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2021/10/27",
+  "summary": "Thoracic aortic aneurysm (TAAs) are a severe complication in Marfan Symdrome (MFS), often leading to dissection and premature death. To identify potential drug targets for the treatment for TAAs we used gene expression profiles from MFS mice and patients to predict kinases that regulate gene expression. Among the top predictions was the kinase HIPK2. Ubiquitous post-natal inactivation of the HIPK2",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE294606",
+  "title": "Identification of Biomarkers Associated with Programmed Cell Death in Aortic Dissection via Transcriptome Sequencing Analysis [RNA-seq]",
+  "n": 13,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2026/05/15",
+  "summary": "Background: Aortic dissection (AD) seriously threatens human health. Programmed cell death (PCD) plays a crucial role in AD development. This study aimed to identify biomarkers associated with PCD-related genes (PCD-RGs) in AD, providing new targets and strategies for therapeutic intervention. Methods: Transcriptome sequencing data from 5 control samples and 8 AD samples were analyzed. Candidate g",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE207784",
+  "title": "Aortic Cellular Diversity and Quantitative GWAS Trait Prioritization through Single Nuclear RNA Sequencing (snRNA-Seq) of the Aneurysmal Human Aorta",
+  "n": 13,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2022/10/03",
+  "summary": "In current models of ascending aortic disease, mural cells undergo phenotypic changes that promote extracellular matrix destruction and structural weakening. To explore the intersection of this biology with quantitative trait GWAS loci we analyzed the genetic features of thoracic aortic aneurysm tissue. Single nuclear RNA sequencing was performed on 13 samples from human donors, 6 with thoracic ao",
+  "hits": [
+   "aneurysm",
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE324926",
+  "title": "GLS1 governs vascular smooth muscle cell phenotypic switching and aortic dissection via glutamate metabolism",
+  "n": 12,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2026/03/20",
+  "summary": "To evaluate the roles of glutaminase 1 (GLS1) in vascular smooth muscle cells (VSMCs) phenotypic switching and aortic dissection (AD). Integrative transcriptomic analyses were performed to identify the candidate genes involved in VSMC phenotypic switching in AD. The expression of GLS1 in VSMCs was assessed by qRT-PCR, Western blot and immunofluorescence. RNA-sequencing analysis was performed to re",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE147028",
+  "title": "Transcriptome and N6-methyladenosine RNA methylome analyses in aortic dissection and normal human aorta",
+  "n": 12,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing; Methylation profiling by high throughput sequencing",
+  "date": "2020/03/17",
+  "summary": "This SuperSeries is composed of the SubSeries listed below.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE52093",
+  "title": "Genome-wide analysis of gene expression of ascending aorta from patients with acute Stanford type A aortic dissection",
+  "n": 12,
+  "gpl": "10558",
+  "type": "Expression profiling by array",
+  "date": "2014/12/31",
+  "summary": "Differentially expressed genes were identified by comparing the gene expression profiling of dissected ascending aorta with that of control. Results provide important information to indicate pathogenesis of aortic dissection.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE202267",
+  "title": "Gene expression changes in human thoracic and abdominal aortic aneurysm tissue",
+  "n": 12,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2024/10/09",
+  "summary": "To determine how gene expression is altered in aorta tissue in response to aortic aneurysm disease. Thoracic or abdominal aorta tissue was isolated from patients requiring surgery due to aortic aneurysm or other (control) reason.",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE155468",
+  "title": "Single-cell Transcriptome Analysis Reveals Dynamic Cell Populations and Differential Gene Expression Patterns in Control and Aneurysmal Human Aortic Tissue",
+  "n": 11,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2020/10/01",
+  "summary": "BACKGROUND: Ascending thoracic aortic aneurysm (ATAA) is caused by the progressive weakening and dilatation of the aortic wall and can lead to aortic dissection, rupture, and other life-threatening complications. To improve our understanding of ATAA pathogenesis, we sought to comprehensively characterize the cellular composition of the ascending aortic wall and to identify molecular alterations in",
+  "hits": [
+   "aneurysm",
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE226492",
+  "title": "Gene expression profile at single cell level of the whole aorta from human.",
+  "n": 10,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2025/03/24",
+  "summary": "To comprehensively study molecular alterations in human aorta tissues,we characterized the cellular heterogeneity of the human aortic wall by performing scRNAseq.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE252721",
+  "title": "H19 Regulates Metabolic Reprogramming Through Encoding a Novel Protein GMRSP and Is Protective Against Aortic Dissection.",
+  "n": 10,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2024/12/30",
+  "summary": "To explore the mechanism by which GMRSP influence the aortic dissection, RNA-sequence was performed  after overexpressing the GMRSP in  PDGFBB-stimulated human-derived SMC.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE189795",
+  "title": "Single-Cell Transcriptomic Analysis Reveals Differential Cell Subpopulations and Distinct Phenotype Transition in Normal and Acute Dissected Ascending Aorta",
+  "n": 9,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2024/11/26",
+  "summary": "Background: Acute thoracic aortic dissection (ATAD) is a fatal condition characterized by tear of intima and formation of false lumen whereby leading to the rupture of aorta. To better understand the potential mechanism of ATAD, we analyzed characterization of different cell types between ATAD and control group and predicted interactions among different cell types which might promote the progressi",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE235995",
+  "title": "Transcriptional Profiles of Aortic Valve from Calcific Aortic Valve Disease and Normal Control.",
+  "n": 9,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2023/06/28",
+  "summary": "We report transcriptional profiles of aortic valve tissue from calcific aortic valve disease (CAVD) and normal control (non-CAVD). We collected the aortic valve tissues from five patients with CAVD who underwent aortic valve replacement due to severe aortic valve stenosis. Aortic valve samples from patients with non-calcified aortic valve resection due to heart transplantation (recipient heart) or",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE213740",
+  "title": "Single-Cell RNA-Seq Analysis Reveals Macrophage Involved in Pathogenesis of Human sporadic type A aortic dissection",
+  "n": 9,
+  "gpl": "18573",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2022/09/23",
+  "summary": "Macrophages play an important role in the progression of sporadic acute type A aortic dissection (ATAAD). The aim of this study was to characterize the cellular heterogeneity of macrophages in AD tissues by scRNA-seq. Ascending aortic wall tissue from 6 ATAAD patients and 3 heart transplant donors were assessed by scRNA-seq, then analyzed and validated by various bioinformatics algo-rithms and his",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE190635",
+  "title": "Expression data from aortic dissection patients and the healthy controls",
+  "n": 8,
+  "gpl": "570",
+  "type": "Expression profiling by array",
+  "date": "2021/12/12",
+  "summary": "The mechanisms of acute aortic dissection are not well understood. Transcriptomic strategy has been proven to be an effective way to find the potential mechanisms and also the reliable biomarkers for a specific disease. The whole-genome expression profiling was assayed in a panel of aortic tissues from 4 male acute aortic dissection patients and 4 male healthy controls.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE147026",
+  "title": "Transcriptome analyses in aortic dissection and normal human aorta",
+  "n": 8,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2020/03/17",
+  "summary": "To identify the m6A methylome in the aorta of patients with acute aortic dissection. MeRIP-seq and RNA-seq experiments of aortic media tissue samples obtained from AD patients and controls were conducted. Compared with control group, the upmethylated coding genes of AD were primarily enriched in the processes associated with extracellular fibril organization, while the genes with downmethylation w",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE343724",
+  "title": "ZFP36L2 Promotes Aortic Dissection by Targeting KCNJ15 mRNA Degradation to Suppress AKT2/3 Signaling in Smooth Muscle Cells",
+  "n": 6,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2026/08/18",
+  "summary": "Aortic dissection (AD) is a life-threatening vascular disease lacking effective pharmacotherapy. Phenotypic switching of vascular smooth muscle cells (VSMCs) from contractile to synthetic state drives medial degeneration, but the upstream post-transcriptional regulators remain elusive. This study investigates the role of the RNA-binding protein ZFP36L2 in VSMC phenotypic switching during AD. Singl",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE330831",
+  "title": "Microfibril denudation marks early aortic vulnerability in SMAD3 variant carriers: a multigenerational study",
+  "n": 6,
+  "gpl": "16791",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2026/07/29",
+  "summary": "Background: Individuals with Loeys-Dietz syndrome 3 (LDS3) are at risk for thoracic aortic dissection even if their aortas are not substantially dilated. A pathogenic variant of SMAD3 is a genetic trigger, but the cellular programs that underlie the heightened aortic risk remain poorly understood. Methods: We ascertained the cardiovascular profile of 57 individuals in a four-generation family with",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE309520",
+  "title": "Histone lactylation enhances m6A-mediated PDK4 stabilization to drive osteogenic differentiation in calcific aortic valve disease",
+  "n": 6,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2026/05/01",
+  "summary": "Calcific aortic valvular disease (CAVD) is characterized by progressive thickening and calcification of the valvular leaflets. Emerging evidence suggests that glycolysis, particularly regulated by pyruvate dehydrogenase kinase 4 (PDK4), plays a significant role in calcification-related diseases. Nevertheless, the mechanisms by which PDK4 affects glycolysis and influences CAVD remain unexplored. Th",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE246021",
+  "title": "Human primary AoSMC treated by Y27632 and not to investigate the role of RhoA/ROCK1/YAP/F-actin in aortic dissection formation",
+  "n": 6,
+  "gpl": "11154",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2025/03/01",
+  "summary": "Rho-kinase signaling and YAP signaling are related to aortic dissection (AD) formation. However, as important biomechanical signaling pathways, their relationships with aortic smooth muscle cell (AoSMC) mechanics have not been investigated in AD formation. This study aims to explore the correlation between RhoA/ROCK1 and YAP, as well as their relationship with intrinsic AoSMC stiffness during AD f",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE241265",
+  "title": "H19 Regulates Metabolic Reprogramming Through Encoding a Novel Protein GMRSP and Is Protective Against Aortic Dissection",
+  "n": 6,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2024/12/30",
+  "summary": "To explore the potential regulators in the pathophysiology of aortic dissection",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE254132",
+  "title": "Integrated Multi-Omics Profiling Reveals Neutrophil Extracellular Traps Promote Aortic Dissection",
+  "n": 6,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2024/11/01",
+  "summary": "Adverse aortic remodeling increases the risk of aorta-related adverse events (AAEs) after thoracic endovascular aortic repair (TEVAR) and affects the overall prognosis of aortic dissection (AD). It is imperative to delve into the exploration of prognostic indicators to We performed single-cell transcriptomic and proteomic profiling of aortic lesions and peripheral blood samples, respectively, from",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE224559",
+  "title": "Single Cell RNA Sequence Reveals a Distinct Immune Landscape in Acute Aortic Dissection.",
+  "n": 6,
+  "gpl": "24247;24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2024/03/01",
+  "summary": "We investigated the relationship between a developemnt of aortic dissection and inflammatory cells. Il-1b high expression macrophage contributed to developing an aortic dissection.",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE183997",
+  "title": "Expression profile alteration of lncRNA and their target genes in patients with aortic dissection",
+  "n": 6,
+  "gpl": "21827",
+  "type": "Expression profiling by array; Non-coding RNA profiling by array",
+  "date": "2021/09/15",
+  "summary": "Aortic dissection (AD) is a cardiovascular emergency resulted from blood flows into vessel wall, with high mortality in early stage. Due to the vital pathological mechanism for AD occurrence has not been clarified, and no effective ways to prevent and diagnose AD\u2019s process. In this study, we determine the lncRNA expression profile in aortic dissection group and control group. The key lncRNAs were ",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE107844",
+  "title": "LncRNA Expression Profile of Human Thoracic Aortic Dissection by High-Throughput Sequencing",
+  "n": 6,
+  "gpl": "20301",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2020/11/30",
+  "summary": "In this study, the long non-coding RNA (lncRNA) expression profile in human thoracic aortic dissection (TAD), a highly lethal cardiovascular disease, was investigated. Human TAD (n=3) and normal aortic tissues (NA) (n=3) were examined by high-throughput sequencing. Bioinformatics analyses were performed to predict the roles of aberrantly expressed lncRNAs. Quantitative real-time polymerase chain r",
+  "hits": [
+   "dissection"
+  ]
+ },
+ {
+  "acc": "GSE306985",
+  "title": "FOXO1-Driven Endothelial Senescence in Bicuspid Aortic Valve-Associated Thoracic Aortic Aneurysm",
+  "n": 6,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2026/09/03",
+  "summary": "Bicuspid aortic valve (BAV) is a congenital malformation that predisposes individuals to thoracic aortic aneurysm (TAA), with endothelial dysfunction playing a pivotal role in its pathogenesis. Endothelial cell senescence is a hallmark of endothelial dysfunction, yet direct evidence linking endothelial senescence to BAV-TAA has not been established. In this study, we generated induced pluripotent ",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE143921",
+  "title": "Vascular smooth muscle cell senescence instigates thoracic aortic aneurysm",
+  "n": 6,
+  "gpl": "18573",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2023/12/01",
+  "summary": "In this study, we identified various cell clusters in human normal/sporadic TAA ascending aorta samples by single-cell RNA sequencing (scRNA-seq), and discovered the senescent vascular smooth muscle cells (VSMCs) significantly increased in TAA samples. Then we explored the molecular basis of TAA progression, and recognized the key regulators and pathways involved in the TAA progression regulation.",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE204771",
+  "title": "RNA sequencing of CTRL and siFBLN4 HAECs",
+  "n": 6,
+  "gpl": "24676",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2023/03/08",
+  "summary": "Fibulin-4 (Fbln4) is an extracellular protein, expressed throughout the aortic wall including endothelial cells (EC), smooth muscle cells (SMC) and fibroblasts. SMC-specific deletion of Fbln4 in mice led to formation of ascending aortic aneurysm with disruption of elastic fibers and Fbln4 is known to play role in elastic fiber formation. However, the function of Fbln4 in EC is unknown. To examine ",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE165824",
+  "title": "Deep learning enables genetic analysis of the human thoracic aorta",
+  "n": 6,
+  "gpl": "18573",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2021/01/30",
+  "summary": "Enlargement or aneurysm of the aorta predisposes to dissection, an important cause of sudden death. We trained a deep learning model to evaluate the dimensions of the ascending and descending thoracic aorta in 4.6 million cardiac magnetic resonance images from the UK Biobank. We then conducted genome-wide association studies in 39,688 individuals, revealing 82 loci associated with ascending and 47",
+  "hits": [
+   "aneurysm"
+  ]
+ },
+ {
+  "acc": "GSE201091",
+  "title": "Aortic single-cell RNA sequencing in ACTA2 R179 variants",
+  "n": 4,
+  "gpl": "24676;24247",
+  "type": "Expression profiling by high throughput sequencing",
+  "date": "2023/01/01",
+  "summary": "Single-cell RNA datasets for aortic tissue from 8-week-old inducible smooth muscle cell-specific knock-in of Acta2 R179C mutation vs. littermate controls and aortic aneurysm tissue from a human patient carrying an ACTA2 R179H variant vs. a pediatric organ donor healthy control.",
+  "hits": [
+   "aneurysm"
+  ]
+ }
+]

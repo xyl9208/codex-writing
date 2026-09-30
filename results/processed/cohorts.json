@@ -1,0 +1,158 @@
+{
+ "GSE26155": {
+  "n_genes": 17306,
+  "n_samples": 53,
+  "groups": {
+   "Control": 31,
+   "ATAA": 22
+  },
+  "counts": false,
+  "disease": "ATAA",
+  "platform": "Affymetrix Human Exon 1.0 ST (RMA)",
+  "tissue": "ascending aorta intima-media",
+  "role": "discovery"
+ },
+ "GSE140947": {
+  "n_genes": 58130,
+  "n_samples": 12,
+  "groups": {
+   "ATAA": 6,
+   "Control": 6
+  },
+  "counts": true,
+  "disease": "ATAA",
+  "platform": "RNA-seq (Illumina NextSeq 500), media; regions summed per subject",
+  "tissue": "ascending aorta media",
+  "role": "discovery"
+ },
+ "GSE235161": {
+  "n_genes": 15262,
+  "n_samples": 42,
+  "groups": {
+   "ATAA": 31,
+   "Control": 11
+  },
+  "counts": false,
+  "disease": "ATAA",
+  "platform": "RNA-seq FPKM (protein-coding, TPM-rescaled, quantile-normalised)",
+  "tissue": "thoracic (ascending) aorta",
+  "role": "validation"
+ },
+ "GSE202267": {
+  "n_genes": 23648,
+  "n_samples": 8,
+  "groups": {
+   "Control": 4,
+   "ATAA": 4
+  },
+  "counts": true,
+  "disease": "ATAA",
+  "platform": "RNA-seq counts",
+  "tissue": "thoracic aorta",
+  "role": "validation"
+ },
+ "GSE52093": {
+  "n_genes": 14112,
+  "n_samples": 12,
+  "groups": {
+   "TAAD": 7,
+   "Control": 5
+  },
+  "counts": false,
+  "disease": "TAAD",
+  "platform": "Illumina HumanHT-12 V4 (log2, quantile)",
+  "tissue": "ascending aorta",
+  "role": "discovery"
+ },
+ "GSE153434": {
+  "n_genes": 26974,
+  "n_samples": 20,
+  "groups": {
+   "Control": 10,
+   "TAAD": 10
+  },
+  "counts": true,
+  "disease": "TAAD",
+  "platform": "RNA-seq counts (Illumina HiSeq X Ten)",
+  "tissue": "ascending aorta",
+  "role": "discovery"
+ },
+ "GSE98770": {
+  "n_genes": 16721,
+  "n_samples": 11,
+  "groups": {
+   "TAAD": 6,
+   "Control": 5
+  },
+  "counts": false,
+  "disease": "TAAD",
+  "platform": "Agilent SurePrint G3 8x60K v2 (re-processed from raw: log2, quantile)",
+  "tissue": "ascending aorta intima-media",
+  "role": "validation"
+ },
+ "GSE190635": {
+  "n_genes": 21728,
+  "n_samples": 8,
+  "groups": {
+   "TAAD": 4,
+   "Control": 4
+  },
+  "counts": false,
+  "disease": "TAAD",
+  "platform": "Affymetrix HG-U133 Plus 2.0 (MAS5 log2)",
+  "tissue": "aorta",
+  "role": "validation"
+ },
+ "GSE294606": {
+  "n_genes": 16364,
+  "n_samples": 13,
+  "groups": {
+   "TAAD": 8,
+   "Control": 5
+  },
+  "counts": true,
+  "disease": "TAAD",
+  "platform": "RNA-seq counts",
+  "tissue": "aorta",
+  "role": "validation"
+ },
+ "GSE267434": {
+  "n_genes": 43605,
+  "n_samples": 12,
+  "groups": {
+   "Control": 6,
+   "TAAD": 6
+  },
+  "counts": false,
+  "disease": "TAAD",
+  "platform": "RNA-seq FPKM (transcript-level summed)",
+  "tissue": "ascending aorta",
+  "role": "validation"
+ },
+ "GSE147026": {
+  "n_genes": 16004,
+  "n_samples": 8,
+  "groups": {
+   "TAAD": 4,
+   "Control": 4
+  },
+  "counts": false,
+  "disease": "TAAD",
+  "platform": "RNA-seq (normalised expression)",
+  "tissue": "aortic media",
+  "role": "validation"
+ },
+ "GSE318877": {
+  "n_genes": 21487,
+  "n_samples": 7,
+  "groups": {
+   "ATAA": 4,
+   "TAAD": 3
+  },
+  "counts": true,
+  "disease": "ATAA_vs_TAAD",
+  "platform": "micro-regional RNA-seq (aortic media punches, summed per subject)",
+  "tissue": "ascending aorta media",
+  "role": "direct comparison"
+ }
+}

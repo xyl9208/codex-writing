@@ -1,0 +1,13 @@
+cohort,disease,role,platform,groups,contrast,method,n_tested,n_FDR05,n_up,n_down,n_FDR05_LFC1
+GSE26155,ATAA,discovery,Affymetrix Human Exon 1.0 ST (RMA),"{'Control': 31, 'ATAA': 22}",ATAA_vs_Control,limma-trend,17306,1966,971,995,77
+GSE140947,ATAA,discovery,"RNA-seq (Illumina NextSeq 500), media; regions summed per subject","{'ATAA': 6, 'Control': 6}",ATAA_vs_Control,DESeq2,14010,1186,548,638,360
+GSE235161,ATAA,validation,"RNA-seq FPKM (protein-coding, TPM-rescaled, quantile-normalised)","{'ATAA': 31, 'Control': 11}",ATAA_vs_Control,limma-trend,14302,7,5,2,7
+GSE202267,ATAA,validation,RNA-seq counts,"{'Control': 4, 'ATAA': 4}",ATAA_vs_Control,DESeq2,10394,81,12,69,81
+GSE52093,TAAD,discovery,"Illumina HumanHT-12 V4 (log2, quantile)","{'TAAD': 7, 'Control': 5}",TAAD_vs_Control,limma-trend,14112,1928,1019,909,338
+GSE153434,TAAD,discovery,RNA-seq counts (Illumina HiSeq X Ten),"{'Control': 10, 'TAAD': 10}",TAAD_vs_Control,DESeq2,13950,3097,1402,1695,1375
+GSE98770,TAAD,validation,"Agilent SurePrint G3 8x60K v2 (re-processed from raw: log2, quantile)","{'TAAD': 6, 'Control': 5}",TAAD_vs_Control,limma-trend,16721,1323,455,868,906
+GSE190635,TAAD,validation,Affymetrix HG-U133 Plus 2.0 (MAS5 log2),"{'TAAD': 4, 'Control': 4}",TAAD_vs_Control,limma-trend,21728,0,0,0,0
+GSE294606,TAAD,validation,RNA-seq counts,"{'TAAD': 8, 'Control': 5}",TAAD_vs_Control,DESeq2,13313,1408,1039,369,1405
+GSE267434,TAAD,validation,RNA-seq FPKM (transcript-level summed),"{'Control': 6, 'TAAD': 6}",TAAD_vs_Control,limma-trend,15535,1051,638,413,439
+GSE147026,TAAD,validation,RNA-seq (normalised expression),"{'TAAD': 4, 'Control': 4}",TAAD_vs_Control,limma-trend,12879,1161,778,383,854
+GSE318877,ATAA_vs_TAAD,direct comparison,"micro-regional RNA-seq (aortic media punches, summed per subject)","{'ATAA': 4, 'TAAD': 3}",TAAD_vs_ATAA,DESeq2,17091,486,254,232,486

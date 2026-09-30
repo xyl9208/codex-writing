@@ -1,0 +1,15 @@
+Accession,Reference,Disease,Design,Platform,Cases,Controls,DE_method,DEGs_FDR05,Role
+GSE26155,Folkersen et al. 2011 (ASAP),ATAA,Ascending aorta intima-media; dilated (>45 mm) vs non-dilated (<40 mm) TAV patients,Affymetrix Human Exon 1.0 ST,ATAA=22,31,limma-trend,1966,ATAA meta-analysis
+GSE140947,Chen et al. 2020,ATAA,Ascending aortic media (aneurysm neck + belly per patient) vs organ-donor media,RNA-seq (NextSeq 500),ATAA=6,6,DESeq2,1186,ATAA meta-analysis
+GSE235161,Ma et al. 2024,ATAA,Thoracic aortic aneurysm tissue (surgical) vs non-aneurysmal aorta (CABG/donor),RNA-seq (FPKM),ATAA=31,11,limma-trend,7,ATAA meta-analysis
+GSE202267,2022,ATAA,Thoracic aortic aneurysm vs non-aneurysmal aorta (surgical controls),RNA-seq (counts),ATAA=4,4,DESeq2,81,ATAA meta-analysis
+GSE52093,Pan et al. 2014,TAAD,"Acute Stanford type A dissection, ascending aorta vs normal ascending aorta",Illumina HumanHT-12 V4,TAAD=7,5,limma-trend,1928,TAAD meta-analysis
+GSE153434,Zhou et al. 2020,TAAD,Acute type A dissection ascending aorta vs normal (heart-transplant donors),RNA-seq (HiSeq X Ten),TAAD=10,10,DESeq2,3097,TAAD meta-analysis
+GSE98770,Kimura et al. 2017,TAAD,Acute type A dissection intima-media vs transplant-donor ascending aorta,Agilent SurePrint G3 8x60K,TAAD=6,5,limma-trend,1323,TAAD meta-analysis
+GSE294606,2025,TAAD,Aortic dissection tissue vs control aorta,RNA-seq (counts),TAAD=8,5,DESeq2,1408,TAAD meta-analysis
+GSE267434,2024,TAAD,Dissected ascending aorta vs normal ascending aorta,RNA-seq (FPKM),TAAD=6,6,limma-trend,1051,TAAD meta-analysis
+GSE147026,Li et al. 2020,TAAD,Acute dissection aortic media vs control media,RNA-seq,TAAD=4,4,limma-trend,1161,TAAD meta-analysis
+GSE190635,2021,TAAD,Aortic dissection vs healthy control aorta (excluded: label inconsistency),Affymetrix HG-U133 Plus 2.0,TAAD=4,4,limma-trend,0,excluded (QC)
+GSE318877,Kimura et al. 2026,ATAA_vs_TAAD,Micro-regional (100 um) punches of ascending aortic media; dissection (3 pts) vs dilatation (4 pts); 70 punches,Micro-regional RNA-seq,TAAD=3 subjects (34 punches),ATAA=4 subjects (36 punches),DESeq2,486,direct TAAD-vs-ATAA contrast
+GSE155468,Li et al. 2020,ATAA,scRNA-seq of ascending aorta: 8 ATAA vs 3 controls,10x Genomics,ATAA=8,3,pseudo-bulk limma,-,single-cell validation
+GSE213740,2022,TAAD,scRNA-seq of ascending aortic wall: 6 sporadic type A dissection vs 3 donors,10x Genomics,TAAD=6,3,pseudo-bulk limma,-,single-cell validation

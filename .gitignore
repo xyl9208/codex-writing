@@ -1,0 +1,17 @@
+# raw downloads (re-downloadable with scripts/02_download.sh)
+data/geo/
+# large intermediates
+results/sc/aorta_sc_integrated.h5ad
+results/sc/pseudobulk_*.csv
+results/sc/cell_metadata.csv
+results/sc/umap.npy
+results/ml/control_referenced_z_disease_samples.csv
+results/processed/*_expr.csv
+results/processed/*_counts.csv
+results/processed/*_log2tpm.csv
+results/pathways/enrichr_libs/
+logs/
+__pycache__/
+*.pyc
+data/genesets/c5.go.bp*
+data/genesets/c2.cp.kegg_medicus*
