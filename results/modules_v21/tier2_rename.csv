@@ -1,0 +1,15 @@
+old,new
+T_SMC_contractile_loss,TAAD signature: SMC-contraction-related (down)
+T_Endothelial_loss,TAAD signature: endothelial-related (down)
+T_Adventitial_fibroblast_loss,TAAD signature: fibroblast-related (down)
+T_Hypoxia_glycolysis,TAAD signature: hypoxia-glycolysis (up)
+T_Oxidative_metal_stress,TAAD signature: oxidative/metal stress (up)
+T_MYC_ribosome_biogenesis,TAAD signature: MYC-ribosome (up)
+T_p53_DNA_damage,TAAD signature: p53-DNA damage (up)
+T_Innate_inflammation,TAAD signature: NF-kB inflammation (up)
+A_IFN_I_response,ATAA signature: interferon response (alpha/beta/gamma sets; up)
+A_MHCII_antigen_presentation,ATAA signature: antigen presentation and immune adhesion-related (MHC-I/II + adhesion; up)
+A_ECM_collagen,ATAA signature: ECM-collagen (up)
+A_Lymphoid_infiltration,ATAA signature: lymphocyte-related (up)
+S_Shared_up,"concordant candidates, both diseases REM-FDR<0.05 (up; n=96 pool)"
+S_Shared_down,concordant candidates (down)

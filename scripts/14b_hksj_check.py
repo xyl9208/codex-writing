@@ -9,7 +9,7 @@ rng = np.random.default_rng(1); rows = []
 for dis in ["ATAA", "TAAD"]:
     m = pd.read_csv(os.path.join(M2, f"{dis}_meta_v2.csv"), index_col=0)
     des = {c: pd.read_csv(os.path.join(DE, f"{c}_de.csv"), index_col=0) for c in DESIGN[dis]["cohorts"]}
-    des = {c: d[~d.index.duplicated()] for c, d in des.items()}
+    des = {c: d[~d.index.duplicated()].dropna(subset=["pvalue", "log2FC"]) for c, d in des.items()}  # identical filtering to 14_meta_rem.load()
     genes = list(m.index[m.consensus_v2][:40]) + list(rng.choice(m.index, 60, replace=False))
     for g in genes:
         y, v = [], []
@@ -20,7 +20,7 @@ for dis in ["ATAA", "TAAD"]:
         r = combine_effects(np.array(y), np.array(v), method_re="dl", use_t=True); s = r.summary_frame(); re = s.loc["random effect"]
         k = len(y); p_re = 2 * stats.norm.sf(abs(re["eff"] / re["sd_eff"]))
         # KH: statsmodels applies Knapp-Hartung when use_t=True to the random-effect row's sd
-        p_kh = 2 * stats.t.sf(abs(re["eff"] / re["sd_eff"]), df=k - 1)
+        sd_hk = float(np.sqrt(np.atleast_1d(r.var_hksj_re)[0])) if hasattr(r, 'var_hksj_re') else float(getattr(r, 'sd_eff_w_re_hksj')); p_kh = 2 * stats.t.sf(abs(re["eff"] / sd_hk), df=k - 1)
         rows.append(dict(disease=dis, gene=g, k=k, lfc_ours=m.loc[g, "lfc_rem"], lfc_sm=re["eff"], se_ours=m.loc[g, "se_rem"], sd_sm=re["sd_eff"], tau2_ours=m.loc[g, "tau2"], tau2_sm=r.tau2,
                          p_rem_ours=m.loc[g, "p_rem"], p_hksj_ours=m.loc[g, "p_hksj"], p_kh_sm=p_kh))
 df = pd.DataFrame(rows); df["d_lfc"] = (df.lfc_ours - df.lfc_sm).abs(); df["d_tau2"] = (df.tau2_ours - df.tau2_sm).abs(); df["ratio_p_hksj"] = df.p_hksj_ours / df.p_kh_sm
