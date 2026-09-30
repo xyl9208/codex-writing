@@ -52,7 +52,16 @@ def scope_scores(label, states):
         if len(cc) < 4: continue
         x = pb[cc]; x = x[(x > 0).mean(axis=1) >= 0.2]  # label-free detectability filter within the scope (as in 20_sc_patient_tests.py)
         ms, ng = module_scores(x, MOD); s = pd.concat([program_scores(ms), ms], axis=1); s["group"] = cols.loc[cc, "group"].values; s["sample"] = cols.loc[cc, "sample"].values; s["n_cells"] = cols.loc[cc, "n_cells"].values; out[ds] = (s, ng)
-    return pb, out
+    return pb, out, cols
+
+def loo(pb, cols, ds, dis):
+    """Leave-one-patient-out robustness: scores re-standardised without the dropped patient; g and exact P for C / I / R."""
+    cc = list(cols.index[cols.dataset == ds]); res = []
+    for drop in cc:
+        kp = [c for c in cc if c != drop]; x = pb[kp]; x = x[(x > 0).mean(axis=1) >= 0.2]; pr = program_scores(module_scores(x, MOD)[0]); grp = cols.loc[kp, "group"].values; r = dict(dropped=cols.loc[drop, "sample"], n_cells_dropped=int(cols.loc[drop, "n_cells"]))
+        for k in ["C", "I", "R"]: xa, ya = pr.loc[grp == dis, k].values, pr.loc[grp == "Control", k].values; r[f"g_{k}"] = hedges_g(xa, ya)[0]; r[f"p_{k}"] = exact_perm_test(xa, ya)[1]
+        res.append(r)
+    return pd.DataFrame(res)
 
 rows, pat = [], []
 def add_tests(s, ds, dis, definition, scope, measures, atype, ng=None):
@@ -64,10 +73,11 @@ def add_tests(s, ds, dis, definition, scope, measures, atype, ng=None):
 
 scopes = [("SMC_all", "whole_SMC", DEFS["SMC_all"], "exploratory_whole_SMC_pseudobulk"), ("SMC_all_plus_fibromyocyte", "whole_mural", DEFS["SMC_all_plus_fibromyocyte"], "exploratory_whole_mural_pseudobulk"),
           ("SMC_modulated", "within_state", ["SMC_modulated"], "exploratory_within_state"), ("SMC_contractile", "within_state", ["SMC_contractile"], "check_only")]
-pb_check = None
+pb_check = pb_all = None
 for definition, scope, states, atype in scopes:
-    pb, out = scope_scores(definition, states)
+    pb, out, cols = scope_scores(definition, states)
     if definition == "SMC_contractile": pb_check = (pb, out); continue  # recomputed only to verify the row-extraction path against the stored primary pipeline
+    if definition == "SMC_all": pb_all = (pb, cols)
     for ds, dis in DS:
         if ds not in out: continue
         s, ng = out[ds]; s = s.assign(dataset=ds, definition=definition, celltype_scope=scope); pat.append(s)
@@ -105,4 +115,7 @@ print("\n(iii) comparison across scopes: Hedges' g [p_exact] for C / I / R (SMC_
 cmpt = R[R.measure.isin(["C", "I", "R"]) & (R.celltype_scope != "composition")].copy(); cmpt["cell"] = cmpt.apply(lambda r: f"{r.g:.2f} [{r.p_exact:.3f}] n={r.n_case}v{r.n_ctrl}", axis=1)
 print(cmpt.pivot_table(index=["dataset", "definition"], columns="measure", values="cell", aggfunc="first").reindex(columns=["C", "I", "R"]).to_string())
 print("\nraw patient scores (SMC_all):"); print(P[P.definition == "SMC_all"][["dataset", "sample", "group", "n_cells", "C", "I", "R"]].round(2).to_string(index=False))
+print("\nNote: whole-population pseudo-bulk mixes within-state expression with SMC-state composition (a shift towards modulated cells lowers the pooled C by construction);")
+print("      the within-state rows separate the two.  Leave-one-patient-out robustness of the SMC_all effects (scores re-standardised without the dropped patient):")
+for ds, dis in DS: print(f"{ds}:"); print(loo(*pb_all, ds, dis).round(3).to_string(index=False))
 print(f"\npeak RSS {resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1e6:.2f} GB")

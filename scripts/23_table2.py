@@ -99,6 +99,17 @@ for k in ["C", "I", "R", "Calcium_handling", "ECM_collagen", "Matrix_degradation
     rows.append(dict(block="6. Ordered dilatation within one cohort (exploratory)", dataset="GSE26155", unit="patient (intima-media, TAV)", comparison="No < Borderline < Yes dilatation (trend)", measure=k, direction=("increasing" if r.rho_spearman > 0 else "decreasing"),
                      effect=f"Spearman rho = {r.rho_spearman:+.2f}; means {r.mean_No:+.2f} / {r.mean_Borderline:+.2f} / {r.mean_Yes:+.2f}", n=f"{int(r.n_No)} / {int(r.n_Borderline)} / {int(r.n_Yes)}", tier1="yes",
                      inference=f"exploratory (JT permutation P = {r.p_perm:.3f}; BH = {r.p_bh:.3f})", estimation="", estimability="credible", note=""))
+# ---------------------------------------------------------------- whole-SMC sensitivity (exploratory)
+f = os.path.join(R, "v21_sc", "smc_population_tests.csv")
+if os.path.exists(f):
+    W2 = pd.read_csv(f)
+    for ds, dis in [("GSE155468", "ATAA"), ("GSE213740", "TAAD")]:
+        for scope, defn, label in [("whole_SMC", "SMC_all", "whole SMC population (contractile + modulated)"), ("within_state", "SMC_modulated", "modulated SMC"), ("composition", "SMC_all", "fraction of modulated SMC among captured SMC")]:
+            q = W2[(W2.dataset == ds) & (W2.celltype_scope == scope) & (W2.definition == defn)]
+            for _, r in q.iterrows():
+                if scope != "composition" and r.measure not in ("C", "I", "R"): continue
+                rows.append(dict(block="8. Whole-SMC sensitivity (exploratory; state composition confounded with within-state expression)", dataset=ds, unit="patient", comparison=f"{dis} vs control, {label}", measure=r.measure, direction=direction(r.g), effect=fmt(r.g, r.ci_low, r.ci_high),
+                                 n=f"{int(r.n_case)} vs {int(r.n_ctrl)}", tier1="yes", inference=f"exploratory (exact P = {r.p_exact:.3f}; {int(r.n_assignments)} assignments; BH = {r.p_bh_exploratory:.2f})" if pd.notna(r.p_bh_exploratory) else f"exploratory (exact P = {r.p_exact:.3f})", estimation=est(r.ci_low, r.ci_high), estimability="limited precision (n small; captured-cell proportions dissociation-biased)", note=str(r.analysis_type)))
 # ---------------------------------------------------------------- conditioned sensitivity
 Cn = pd.read_csv(os.path.join(R, "v21_conditioned", "conditioned_sensitivity_pooled.csv"))
 for dis in ["ATAA", "TAAD"]:
@@ -109,7 +120,7 @@ for dis in ["ATAA", "TAAD"]:
                          inference="sensitivity", estimation=("retained" if r.retained == "yes" else "attenuated / uncertain"), estimability="credible", note=""))
 T = pd.DataFrame(rows); T.to_csv(os.path.join(MS, "Table2_evidence_matrix.csv"), index=False)
 # short main-text version (C, I, R only)
-short = T[T.measure.isin(["C", "I", "R"]) & ~T.block.str.startswith("7.")].copy()
+short = T[T.measure.isin(["C", "I", "R"]) & ~T.block.str.startswith("7.") & ~T.block.str.startswith("8.")].copy()
 short.to_csv(os.path.join(MS, "Table2_evidence_matrix_main.csv"), index=False)
 pd.set_option("display.width", 300); pd.set_option("display.max_colwidth", 60)
 print(short[["block", "dataset", "comparison", "measure", "effect", "n", "inference", "estimation", "estimability"]].to_string(index=False))

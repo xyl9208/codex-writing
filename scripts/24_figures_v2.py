@@ -28,7 +28,7 @@ def fig1():
     def box(x, y, w, h, text, fc, fs=7.2, ec="#444444"):
         ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.02,rounding_size=0.08", fc=fc, ec=ec, lw=0.8)); ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=fs, wrap=True)
     rows = [("Bulk transcriptomes\n10 cohorts: 4 ATAA (63 vs 52), 6 TAAD (41 vs 35)\n+ GSE190635 (flagged, sensitivity only)", "Unit: patient within cohort;\ncohorts compared at cohort level", "F1 primary: C, I, R (Holm)\nTAAD effect vs ATAA effect", "#dbe9f6"),
-            ("scRNA-seq, patient x cell-type pseudo-bulk\nGSE155468 (ATAA 8 vs 3), GSE213740 (TAAD 6 vs 3),\nGSE189795 (acute TAAD 5 vs 4)", "Unit: patient (>= 20 cells of the type)\nlabel-free scores within cell type", "F2 primary: R in contractile SMC\n(exact enumeration; one test per dataset)", "#fde4d8"),
+            ("scRNA-seq, patient x cell-type pseudo-bulk\nGSE155468 (ATAA 8 vs 3; 7 vs 3 with >= 20 contractile SMC), GSE213740 (TAAD 6 vs 3),\nGSE189795 (acute TAAD 5 vs 4; no contractile-SMC cluster recovered)", "Unit: patient (>= 20 cells of the type)\nlabel-free scores within cell type", "F2 primary: R in contractile SMC (exact enumeration;\none test per dataset; not estimable if the cell type is missing)", "#fde4d8"),
             ("Within-patient regions\nGSE140947: aneurysm belly vs neck (6 pairs)", "Unit: within-patient difference", "F3 primary: delta R\n(exact sign-flip, 64 assignments)", "#e6f2e0"),
             ("Stage and wall layer\nGSE222318 (acute/subacute/chronic; sampling position differs)\nGSE318877 (3 dissection vs 4 dilatation; 4 medial layers)", "Unit: patient; patient x layer", "Estimation only\n(no inferential test; CI and raw scores)", "#f3e6f7"),
             ("Ordered dilatation within one cohort\nGSE26155: No (31) < Borderline (6) < Yes (22)", "Unit: patient (intima-media, TAV)", "Exploratory trend (Jonckheere-Terpstra,\npermutation P; BH)", "#f7f3d9")]
@@ -166,16 +166,19 @@ def fig4():
     for k, off, col in [("C", 0.22, "#2ca02c"), ("I", 0.0, "#ff7f0e"), ("R", -0.22, "#1f1f1f")]:
         dd = e[e.measure == k].set_index("contrast").reindex(cons); ax.errorbar(dd.g, y + off, xerr=[np.nan_to_num(dd.g - dd.ci_low), np.nan_to_num(dd.ci_high - dd.g)], fmt="o", color=col, ms=4, capsize=1.5, lw=0.8, label=LAB[k])
         for yi, (c, r) in zip(y + off, dd.iterrows()):
-            if not np.isnan(r.g): ax.text(ax.get_xlim()[1] if False else 6.2, yi, f"{int(r.n_A)} vs {int(r.n_B)}; pos {r.positions_A} vs {r.positions_B}", fontsize=5.3, va="center", color=col)
-    ax.axvline(0, color="k", lw=0.6); ax.set_yticks(y); ax.set_yticklabels([lab[c] for c in cons]); ax.set_xlim(-6, 9.5); ax.set_xlabel("Hedges' g (95 % CI, clipped); estimation only, no inferential test"); ax.legend(frameon=False, fontsize=6.5, loc="lower right"); ax.set_title("GSE222318 contractile SMC: stage contrasts (sampling position confounded with stage)", fontsize=8)
-    # (e) GSE189795
-    ax = fig.add_subplot(gs[1, 2]); panel(ax, "e"); d2 = S2[S2.celltype == "SMC_contractile"]
+            if not np.isnan(r.g): ax.text(9.7, yi, f"{int(r.n_A)} vs {int(r.n_B)}; {r.positions_A} vs {r.positions_B}".replace("Intima-medium", "IM").replace("Whole", "W"), fontsize=5.3, va="center", color=col)
+    ax.axvline(0, color="k", lw=0.6); ax.set_yticks(y); ax.set_yticklabels([lab[c] for c in cons]); ax.set_xlim(-6, 13.5); ax.set_xlabel("Hedges' g (95 % CI, clipped); estimation only, no inferential test; IM = intima-media, W = whole wall"); ax.legend(frameon=False, fontsize=6.5, loc="lower left"); ax.set_title("GSE222318 contractile SMC: stage contrasts (sampling position confounded with stage)", fontsize=8)
+    # (e) GSE189795: contractile SMC if recovered in >= 4 patients, otherwise modulated SMC as an exploratory substitute (primary test not estimable)
+    ax = fig.add_subplot(gs[1, 2]); panel(ax, "e", 1.16)
+    ct = "SMC_contractile" if (S2.celltype == "SMC_contractile").sum() >= 4 else "SMC_modulated"; d2 = S2[S2.celltype == ct]
     long = d2.melt(id_vars=["group"], value_vars=["C", "I", "R"], var_name="measure", value_name="score"); sns.stripplot(data=long, x="measure", y="score", hue="group", dodge=True, palette={"Acute": COL["TAAD"], "Control": COL["Control"]}, size=4.5, ax=ax, jitter=0.12, edgecolor="k", linewidth=0.3)
     sns.pointplot(data=long, x="measure", y="score", hue="group", dodge=0.4, palette={"Acute": COL["TAAD"], "Control": COL["Control"]}, errorbar=None, markers="_", markersize=14, linestyle="none", ax=ax, legend=False)
-    t = E2[(E2.celltype == "SMC_contractile") & (E2.measure.isin(["C", "I", "R"]))].set_index("measure")
-    txt = "\n".join([f"{k}: g = {t.loc[k, 'g']:+.2f} [{t.loc[k, 'ci_low']:.2f}, {t.loc[k, 'ci_high']:.2f}]" + (f", exact P = {t.loc[k, 'p_exact']:.3f} (primary)" if k == "R" else "") for k in ["C", "I", "R"]])
-    ax.text(0.02, 0.98, txt, transform=ax.transAxes, fontsize=6.3, va="top", bbox=dict(fc="white", ec="#cccccc", lw=0.5)); ax.axhline(0, color="#dddddd", lw=0.6); ax.legend(frameon=False, fontsize=6.5, loc="lower left"); ax.set_xlabel(""); ax.set_ylabel("label-free score, contractile SMC")
-    ax.set_title(f"GSE189795 acute TAAD ({int(t.loc['R', 'n_acute'])}) vs control ({int(t.loc['R', 'n_ctrl'])}), contractile SMC", fontsize=8)
+    t = E2[(E2.celltype == ct) & (E2.measure.isin(["C", "I", "R"]))].set_index("measure")
+    tag = "primary" if ct == "SMC_contractile" else "exploratory substitute"
+    txt = "\n".join([f"{k}: g = {t.loc[k, 'g']:+.2f} [{t.loc[k, 'ci_low']:.2f}, {t.loc[k, 'ci_high']:.2f}], exact P = {t.loc[k, 'p_exact']:.3f}" + (f" ({tag})" if k == "R" else "") for k in ["C", "I", "R"]])
+    ax.text(0.02, 0.02, txt, transform=ax.transAxes, fontsize=5.8, va="bottom", bbox=dict(fc="white", ec="#cccccc", lw=0.5)); ax.axhline(0, color="#dddddd", lw=0.6); ax.legend(frameon=False, fontsize=6.5, loc="upper right"); ax.set_xlabel(""); ax.set_ylabel(f"label-free score, {ct.replace('_', ' ')}")
+    if ct == "SMC_contractile": ax.set_title(f"GSE189795 acute TAAD ({int(t.loc['R', 'n_acute'])}) vs control ({int(t.loc['R', 'n_ctrl'])}), contractile SMC", fontsize=8)
+    else: ax.set_title(f"GSE189795 acute TAAD ({int(t.loc['R', 'n_acute'])}) vs control ({int(t.loc['R', 'n_ctrl'])})\nno contractile-SMC cluster; modulated SMC (exploratory)", fontsize=7.5, pad=10)
     save(fig, "Fig4_stage")
 
 # ====================================================================== Figure 5 (within patient)
@@ -214,41 +217,87 @@ def fig5():
 
 # ====================================================================== Figure 6 (programme organisation)
 def fig6():
+    from matplotlib.lines import Line2D
     E = pd.read_csv(os.path.join(R, "v21_bulk", "bulk_effects_per_cohort.csv")); T = pd.read_csv(os.path.join(R, "v21_sc", "sc_patient_level_tests.csv")); P = pd.read_csv(os.path.join(R, "v21_bulk", "GSE318877_patient_estimates.csv")).set_index("measure")
     pooled = pd.read_csv(os.path.join(R, "v21_bulk", "bulk_pooled_and_disease_difference.csv")).set_index("measure")
-    fig = plt.figure(figsize=(13, 5.8)); gs = fig.add_gridspec(1, 2, width_ratios=[1, 1.35], wspace=0.15)
+    B = pd.read_csv(os.path.join(R, "v21_bulk", "bulk_patient_scores.csv"), index_col=0); S = pd.read_csv(os.path.join(R, "v21_sc", "sc_patient_celltype_scores.csv")); G = pd.read_csv(os.path.join(R, "v21_bulk", "GSE318877_patient_scores.csv"))
+    W = pd.read_csv(os.path.join(R, "v21_within", "GSE140947_paired_tests.csv")); Cn = pd.read_csv(os.path.join(R, "v21_conditioned", "conditioned_sensitivity_pooled.csv"))
+    BR = "#8c564b"; f189 = os.path.join(R, "v21_stage", "GSE189795_tests.csv"); s189 = os.path.join(R, "v21_stage", "GSE189795_patient_celltype_scores.csv")
+    t189 = pd.read_csv(f189) if os.path.exists(f189) else pd.DataFrame(columns=["celltype", "measure", "g"]); t189 = t189[t189.celltype == "SMC_contractile"].set_index("measure")
+    n_diss, n_dil = int((G.group == "TAAD").sum()), int((G.group == "ATAA").sum())
+    fig = plt.figure(figsize=(13.5, 11)); gs = fig.add_gridspec(2, 2, width_ratios=[1, 1.1], height_ratios=[1.15, 1], hspace=0.45, wspace=0.28)
+    # (a) standardised effects (Hedges' g), disease vs control; GSE318877 (reference = dilatation) in a separate inset
     ax = fig.add_subplot(gs[0, 0]); panel(ax, "a")
     for c in ATAA_C + TAAD_C:
         d = E[E.cohort == c].set_index("measure"); dis = d.disease.iloc[0]; ax.errorbar(d.loc["C", "g"], d.loc["I", "g"], xerr=[[d.loc["C", "g"] - d.loc["C", "ci_low"]], [d.loc["C", "ci_high"] - d.loc["C", "g"]]], yerr=[[d.loc["I", "g"] - d.loc["I", "ci_low"]], [d.loc["I", "ci_high"] - d.loc["I", "g"]]], fmt="o", color=COL[dis], ms=5, capsize=1.5, lw=0.6, alpha=0.8)
         ax.annotate(c.replace("GSE", ""), (d.loc["C", "g"], d.loc["I", "g"]), fontsize=5.5, xytext=(3, 3), textcoords="offset points", color=COL[dis])
-    for dis in ["ATAA", "TAAD"]: ax.scatter(pooled.loc["C", f"g_{dis}"], pooled.loc["I", f"g_{dis}"], marker="D", s=90, color=COL[dis], edgecolor="k", lw=0.8, zorder=5, label=f"{dis} pooled (bulk)")
+    for dis in ["ATAA", "TAAD"]: ax.scatter(pooled.loc["C", f"g_{dis}"], pooled.loc["I", f"g_{dis}"], marker="D", s=90, color=COL[dis], edgecolor="k", lw=0.8, zorder=5)
     for ds, dis in [("GSE155468", "ATAA"), ("GSE213740", "TAAD")]:
         t = T[(T.dataset == ds) & (T.celltype == "SMC_contractile")].set_index("measure"); ax.scatter(t.loc["C", "g"], t.loc["I", "g"], marker="*", s=110, color=COL[dis], edgecolor="k", lw=0.6, zorder=5); ax.annotate(f"{ds} SMC", (t.loc["C", "g"], t.loc["I", "g"]), fontsize=5.5, xytext=(-40 if dis == "TAAD" else 6, 8 if dis == "TAAD" else -12), textcoords="offset points", color=COL[dis])
-    f = os.path.join(R, "v21_stage", "GSE189795_tests.csv")
-    if os.path.exists(f):
-        t = pd.read_csv(f); t = t[t.celltype == "SMC_contractile"].set_index("measure"); ax.scatter(t.loc["C", "g"], t.loc["I", "g"], marker="*", s=110, color=COL["TAAD"], edgecolor="k", lw=0.6, zorder=5); ax.annotate("GSE189795\nSMC (acute, scRNA)", (t.loc["C", "g"], t.loc["I", "g"]), fontsize=5.5, xytext=(4, 4), textcoords="offset points", color=COL["TAAD"])
-    ax.scatter(P.loc["C", "g"], P.loc["I", "g"], marker="P", s=80, color="#8c564b", edgecolor="k", lw=0.6, zorder=5); ax.annotate("GSE318877 dissection vs dilatation", (P.loc["C", "g"], P.loc["I", "g"]), fontsize=5.5, xytext=(-70, -12), textcoords="offset points", color="#8c564b")
-    lim = 4.2; ax.plot([-lim, lim], [lim, -lim], color="#999999", lw=0.8, ls="--"); ax.text(-3.9, 3.5, "R unchanged (I = -C)", fontsize=6.5, color="#777777", rotation=-45)
-    ax.axhline(0, color="#dddddd", lw=0.6); ax.axvline(0, color="#dddddd", lw=0.6); ax.set_xlim(-lim, 2); ax.set_ylim(-1.5, lim); ax.set_xlabel("effect on C (contractile), Hedges' g"); ax.set_ylabel("effect on I (injury composite), Hedges' g")
-    ax.legend(frameon=False, fontsize=6.5, loc="upper right"); ax.set_title("Effects on the two programmes across datasets (circles: bulk cohorts; diamonds: REM pooled;\nstars: patient-level contractile SMC; cross: direct 3-vs-4 contrast)", fontsize=7.5)
-    # (b) state comparison table
-    ax = fig.add_subplot(gs[0, 1]); ax.axis("off"); panel(ax, "b")
+    if "C" in t189.index: ax.scatter(t189.loc["C", "g"], t189.loc["I", "g"], marker="*", s=110, color=COL["TAAD"], edgecolor="k", lw=0.6, zorder=5); ax.annotate("GSE189795 SMC (acute)", (t189.loc["C", "g"], t189.loc["I", "g"]), fontsize=5.5, xytext=(4, 4), textcoords="offset points", color=COL["TAAD"])
+    else: ax.text(0.02, 0.02, "GSE189795 (acute TAAD, scRNA): no contractile-SMC cluster annotated; not shown", transform=ax.transAxes, fontsize=5.5, color="#555555", va="bottom")
+    lim = 4.2; ax.axhline(0, color="#dddddd", lw=0.6); ax.axvline(0, color="#dddddd", lw=0.6); ax.set_xlim(-lim, 2); ax.set_ylim(-1.5, lim); ax.set_xlabel("effect on C (contractile), Hedges' g"); ax.set_ylabel("effect on I (injury composite), Hedges' g")
+    ins = ax.inset_axes([0.62, 0.60, 0.36, 0.33]); ins.errorbar(P.loc["C", "g"], P.loc["I", "g"], xerr=[[P.loc["C", "g"] - P.loc["C", "ci_low"]], [P.loc["C", "ci_high"] - P.loc["C", "g"]]], yerr=[[P.loc["I", "g"] - P.loc["I", "ci_low"]], [P.loc["I", "ci_high"] - P.loc["I", "g"]]], fmt="X", color=BR, ms=7, mec="k", mew=0.5, capsize=2, lw=0.8)
+    ins.axhline(0, color="#dddddd", lw=0.6); ins.axvline(0, color="#dddddd", lw=0.6); ins.set_xlim(-5, 2.5); ins.set_ylim(-4.5, 2.5); ins.tick_params(labelsize=5, length=2, pad=1); ins.set_xlabel("g, C", fontsize=5.5, labelpad=1); ins.set_ylabel("g, I", fontsize=5.5, labelpad=1)
+    ins.set_title(f"GSE318877 dissection ({n_diss}) vs dilatation ({n_dil}), 95 % CI\nreference = dilatation, not control", fontsize=5.6, color=BR, pad=2)
+    H = [Line2D([], [], marker="o", ls="", color=COL["ATAA"], ms=5, label="bulk cohort, ATAA vs control (95 % CI)"), Line2D([], [], marker="o", ls="", color=COL["TAAD"], ms=5, label="bulk cohort, TAAD vs control (95 % CI)"),
+         Line2D([], [], marker="D", ls="", mfc="#bbbbbb", mec="k", ms=7, label="REM pooled over bulk cohorts (per disease)"), Line2D([], [], marker="*", ls="", mfc="#bbbbbb", mec="k", ms=10, label="patient-level contractile SMC (scRNA), disease vs control"),
+         Line2D([], [], marker="X", ls="", mfc=BR, mec="k", ms=7, label="GSE318877 dissection vs dilatation (inset): reference = dilatation, not control")]
+    ax.legend(handles=H, frameon=False, fontsize=6.2, loc="upper left", bbox_to_anchor=(0.0, -0.1), ncol=1)
+    ax.set_title("Standardised effects on C and I (Hedges' g) across datasets\n(g_C and g_I are scaled by different SDs, so delta R cannot be read from this plane; see b)", fontsize=7.5)
+    # (b) within-dataset mean differences on the score scale (delta R = delta I + delta C is valid here)
+    rows = []
+    def add(ds, comp, ref_name, case, ref, kind, dis): rows.append(dict(dataset=ds, comparison=comp, reference=ref_name, delta_C=case.C.mean() - ref.C.mean(), delta_I=case.I.mean() - ref.I.mean(), n_case=len(case), n_ref=len(ref), kind=kind, dis=dis))
+    for c in ATAA_C + TAAD_C:
+        d = B[B.cohort == c]; dis = d.disease.iloc[0]; add(c, f"{dis} vs control (bulk, patient level)", "control", d[d.group == dis], d[d.group == "Control"], "bulk", dis)
+    for ds, dis in [("GSE155468", "ATAA"), ("GSE213740", "TAAD")]:
+        d = S[(S.dataset == ds) & (S.celltype == "SMC_contractile")]; add(ds, f"{dis} vs control (contractile SMC, patient level)", "control", d[d.group == dis], d[d.group == "Control"], "smc", dis)
+    if os.path.exists(s189):
+        d = pd.read_csv(s189); d = d[d.celltype == "SMC_contractile"]
+        if len(d): add("GSE189795", "acute TAAD vs control (contractile SMC, patient level)", "control", d[d.group == "Acute"], d[d.group == "Control"], "smc", "TAAD")
+    add("GSE318877", "dissection vs dilatation (patient level)", "dilatation", G[G.group == "TAAD"], G[G.group == "ATAA"], "318877", "TAAD")
+    w = W[W.contrast == "aneurysm_belly_minus_neck"].set_index("measure"); rows.append(dict(dataset="GSE140947", comparison="aneurysm belly minus neck (within patient)", reference="neck (same patient)", delta_C=w.loc["C", "mean_delta"], delta_I=w.loc["I", "mean_delta"], n_case=int(w.loc["C", "n_pairs"]), n_ref=int(w.loc["C", "n_pairs"]), kind="within", dis="ATAA"))
+    D = pd.DataFrame(rows); D["delta_R"] = D.delta_C + D.delta_I
+    D[["dataset", "comparison", "reference", "delta_C", "delta_I", "delta_R", "n_case", "n_ref"]].to_csv(os.path.join(R, "v21_bulk", "programme_mean_differences.csv"), index=False)
+    ax = fig.add_subplot(gs[0, 1]); panel(ax, "b"); x0, x1, y0, y1 = -1.85, 0.6, -1.25, 2.05
+    for k in np.arange(-2.5, 2.6, 0.5):
+        z = abs(k) < 1e-9; ax.plot([x0, x1], [k - x0, k - x1], color="#555555" if z else "#c8c8c8", lw=0.9 if z else 0.5, ls="--" if z else ":", zorder=0)
+        lab = "delta R = 0 (delta I = -delta C)" if z else f"delta R = {k:+.1f}"
+        if k - x1 >= y0: ax.text(x1 + 0.03, k - x1, lab, fontsize=6 if z else 5.2, color="#555555" if z else "#999999", ha="left", va="center")   # line leaves through the right edge: label outside
+        elif k - y0 >= x0: ax.text(k - y0, y0, lab + " ", fontsize=5.2, color="#999999", rotation=-45, transform_rotates_text=True, rotation_mode="anchor", ha="right", va="bottom")   # leaves through the bottom edge: label inside, along the line
+    MK = {"bulk": ("o", 50), "smc": ("*", 130), "318877": ("X", 70), "within": ("^", 60)}; SUF = {"smc": " SMC", "within": " belly-neck", "318877": " diss-dil", "bulk": ""}
+    POS = {"GSE147026": (-1.42, 1.9, "right"), "GSE153434": (-1.33, 1.72, "right"), "GSE52093": (-1.5, 1.3, "right"), "GSE98770": (-1.5, 0.98, "right"), "GSE267434": (-0.74, 1.5, "left"), "GSE202267": (-0.74, 1.02, "left")}
+    OFF = {("GSE294606", "bulk"): (-6, -3, "right"), ("GSE213740", "smc"): (-7, 2, "right"), ("GSE155468", "smc"): (6, -8, "left"), ("GSE318877", "318877"): (-7, -8, "right"), ("GSE140947", "within"): (6, -8, "left"), ("GSE26155", "bulk"): (5, 1, "left")}
+    for _, r in D.iterrows():
+        col = BR if r.kind == "318877" else COL[r.dis]; m, s = MK[r.kind]; ax.scatter(r.delta_C, r.delta_I, marker=m, s=s, color=col, edgecolor="k", lw=0.5, zorder=5); lab = f"{r.dataset.replace('GSE', '')}{SUF[r.kind]}: {r.delta_R:+.2f}"
+        if r.kind == "bulk" and r.dataset in POS: px, py, ha = POS[r.dataset]; ax.annotate(lab, (r.delta_C, r.delta_I), xytext=(px, py), textcoords="data", fontsize=5.5, ha=ha, va="center", color=col, zorder=6, arrowprops=dict(arrowstyle="-", color=col, lw=0.4, shrinkA=0, shrinkB=2))
+        else: dx, dy, ha = OFF.get((r.dataset, r.kind), (5, 2, "left")); ax.annotate(lab, (r.delta_C, r.delta_I), xytext=(dx, dy), textcoords="offset points", fontsize=5.5, ha=ha, color=col, zorder=6)
+    ax.axhline(0, color="#dddddd", lw=0.6); ax.axvline(0, color="#dddddd", lw=0.6); ax.set_xlim(x0, x1); ax.set_ylim(y0, y1); ax.set_xlabel("delta C = mean C (case) - mean C (reference), score units"); ax.set_ylabel("delta I = mean I (case) - mean I (reference), score units")
+    H = [Line2D([], [], marker="o", ls="", color=COL["ATAA"], ms=5, label="bulk cohort, ATAA vs control"), Line2D([], [], marker="o", ls="", color=COL["TAAD"], ms=5, label="bulk cohort, TAAD vs control"), Line2D([], [], marker="*", ls="", mfc="#bbbbbb", mec="k", ms=10, label="contractile SMC (scRNA, patient level), disease vs control"),
+         Line2D([], [], marker="^", ls="", color=COL["ATAA"], mec="k", ms=6, label="GSE140947 aneurysm belly minus neck (within patient, 6 pairs)"), Line2D([], [], marker="X", ls="", mfc=BR, mec="k", ms=7, label="GSE318877 dissection vs dilatation: reference = dilatation, not control")]
+    ax.legend(handles=H, frameon=False, fontsize=6.2, loc="upper left", bbox_to_anchor=(0.0, -0.1), ncol=1)
+    ax.set_title("Within-dataset mean differences on the label-free score scale (case minus reference)\niso-lines: constant delta R = delta I + delta C (dashed: delta R = 0); point labels give dataset: delta R\ncomparable within a dataset, not across datasets; GSE318877 uses dilatation, not control, as reference", fontsize=7.5)
+    # (c) state comparison table; composition-conditioned sensitivity read at render time
+    ax = fig.add_subplot(gs[1, :]); ax.axis("off"); ax.text(0.0, 1.0, "c", transform=ax.transAxes, fontsize=11, fontweight="bold", va="bottom")
     def g_(m, dis): return f"{pooled.loc[m, f'g_{dis}']:+.2f}" + ("*" if (pooled.loc[m, f'ci_low_{dis}'] > 0 or pooled.loc[m, f'ci_high_{dis}'] < 0) else "")
-    rows = [["C  SMC contractile", g_("C", "ATAA"), g_("C", "TAAD"), "yes (Holm P<0.001)", "decreases with dilatation, GSE26155 (BH 0.02);\nlower in SMC of both scRNA sets (CI excl. 0; n small)"],
-            ["I  injury composite", g_("I", "ATAA"), g_("I", "TAAD"), f"borderline\n(Holm P={pooled.loc['I', 'p_diff_holm']:.2f})", "no trend with dilatation (GSE26155);\nSMC level: CI includes 0 in both scRNA sets"],
-            ["R  relative state (I + C)", g_("R", "ATAA"), g_("R", "TAAD"), f"no (P = {pooled.loc['R', 'p_diff']:.2f})", "F2 and F3 primary tests not passed;\nGSE318877 estimation only"],
-            ["Glycolysis / oxidative /\nMYC-ribosome", " / ".join([f"{pooled.loc[m, 'g_ATAA']:+.1f}" for m in ["Glycolysis", "Oxidative_stress_NFE2L2", "MYC_ribosome"]]), " / ".join([f"{pooled.loc[m, 'g_TAAD']:+.1f}" for m in ["Glycolysis", "Oxidative_stress_NFE2L2", "MYC_ribosome"]]), "yes (BH 0.01-0.02)", "no trend with dilatation;\nattenuated after conditioning in ATAA only"],
+    def ret(m, dis): v = Cn[(Cn.disease == dis) & (Cn.measure == m)].retained; return "n/a" if len(v) == 0 else ("yes" if v.iloc[0] == "yes" else "uncertain")
+    def cond(ms): return "retained after conditioning on 3 cell signatures (ATAA: " + " / ".join(ret(m, "ATAA") for m in ms) + "; TAAD: " + " / ".join(ret(m, "TAAD") for m in ms) + ")"
+    met = ["Glycolysis", "Oxidative_stress_NFE2L2", "MYC_ribosome"]
+    rows = [["C  SMC contractile", g_("C", "ATAA"), g_("C", "TAAD"), "yes (Holm P<0.001)", "decreases with dilatation, GSE26155 (BH 0.02); point estimates lower in SMC of both scRNA sets (exact P 0.17; n small);\n" + cond(["C"])],
+            ["I  injury composite", g_("I", "ATAA"), g_("I", "TAAD"), f"borderline\n(Holm P={pooled.loc['I', 'p_diff_holm']:.2f})", "no trend with dilatation (GSE26155); SMC level: CI includes 0 in both scRNA sets;\n" + cond(["I"])],
+            ["R  relative state (I + C)", g_("R", "ATAA"), g_("R", "TAAD"), f"no (P = {pooled.loc['R', 'p_diff']:.2f})", "F2 and F3 primary tests not passed; GSE318877 estimation only;\n" + cond(["R"])],
+            ["Glycolysis / oxidative /\nMYC-ribosome", " / ".join([f"{pooled.loc[m, 'g_ATAA']:+.1f}" for m in met]), " / ".join([f"{pooled.loc[m, 'g_TAAD']:+.1f}" for m in met]), "yes (BH 0.01-0.02)", "no trend with dilatation;\n" + cond(met)],
             ["IFN-alpha response", g_("IFN_alpha_response", "ATAA"), g_("IFN_alpha_response", "TAAD"), f"no (BH {pooled.loc['IFN_alpha_response', 'p_diff_bh']:.2f})", "increases with dilatation (BH 0.01)"],
             ["MHC-II antigen\npresentation", g_("MHCII_antigen_presentation", "ATAA"), g_("MHCII_antigen_presentation", "TAAD"), f"borderline\n(BH {pooled.loc['MHCII_antigen_presentation', 'p_diff_bh']:.2f})", "increases with dilatation (BH 0.01);\nhigher in ATAA SMC (exact P 0.07; n small)"],
             ["T-cell signature", g_("sig_T_cell", "ATAA"), g_("sig_T_cell", "TAAD"), f"borderline\n(BH {pooled.loc['sig_T_cell', 'p_diff_bh']:.2f})", "increases with dilatation (BH 0.01)"],
             ["ECM-collagen", g_("ECM_collagen", "ATAA"), g_("ECM_collagen", "TAAD"), f"no (BH {pooled.loc['ECM_collagen', 'p_diff_bh']:.2f})", "increases with dilatation (BH 0.03)"],
             ["Endothelial / fibroblast\nsignatures", " / ".join([f"{pooled.loc[m, 'g_ATAA']:+.1f}" for m in ["sig_Endothelial", "sig_Fibroblast"]]), " / ".join([f"{pooled.loc[m, 'g_TAAD']:+.1f}" for m in ["sig_Endothelial", "sig_Fibroblast"]]), "yes\n(BH 0.002 / 0.007)", "composition level; not a within-cell finding"]]
-    tab = ax.table(cellText=rows, colLabels=["programme (Tier 1)", "ATAA vs\ncontrol", "TAAD vs\ncontrol", "differs between\ndiseases?", "within-cohort / patient-level evidence"], colWidths=[0.19, 0.095, 0.095, 0.16, 0.46], loc="upper center", cellLoc="left")
-    tab.auto_set_font_size(False); tab.set_fontsize(6.0)
+    tab = ax.table(cellText=rows, colLabels=["programme (Tier 1)", "ATAA vs\ncontrol", "TAAD vs\ncontrol", "differs between\ndiseases?", "within-cohort / patient-level evidence; composition-signature-conditioned sensitivity (Fig. 2e)"], colWidths=[0.15, 0.09, 0.09, 0.12, 0.55], loc="upper center", cellLoc="left", bbox=[0.02, 0.15, 0.96, 0.85])
+    tab.auto_set_font_size(False); tab.set_fontsize(6.3)
     for (r_, c_), cell in tab.get_celld().items():
-        cell.set_edgecolor("#dddddd"); cell.set_height(0.095 if r_ > 0 else 0.08); cell.PAD = 0.03
+        cell.set_edgecolor("#dddddd"); cell.PAD = 0.02
         if r_ == 0: cell.set_text_props(fontweight="bold")
-    ax.text(0, 0.0, "* pooled 95 % CI excludes 0. Tissue-level state comparison; no temporal or causal ordering is implied.\nSupported: cohort-level differences in C and in the metabolic/stress modules. Undetermined: whether the relative state R\ndiffers within the same wall cells (patient-level tests underpowered).", transform=ax.transAxes, fontsize=6.2, va="top")
+    ax.text(0.02, 0.11, "* pooled 95 % CI excludes 0. Tissue-level state comparison; no temporal or causal ordering is implied. Supported: cohort-level differences in C and in some metabolic/stress modules.\nNot determined: whether the relative organisation of the two programmes differs (R and patient-level tests inconclusive).", transform=ax.transAxes, fontsize=6.3, va="top")
     save(fig, "Fig6_programme_organisation")
 
 # ====================================================================== Supplementary
