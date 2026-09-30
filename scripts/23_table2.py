@@ -47,6 +47,14 @@ for ds, dis in [("GSE155468", "ATAA"), ("GSE213740", "TAAD")]:
 f = os.path.join(R, "v21_stage", "GSE189795_tests.csv")
 if os.path.exists(f):
     E2 = pd.read_csv(f); d = E2[E2.celltype == "SMC_contractile"]
+    if len(d) == 0:
+        rows.append(dict(block="3. Stage: acute dissection (external replicate)", dataset="GSE189795", unit="patient (>=20 contractile SMC)", comparison="acute TAAD vs control", measure="R", direction="NA", effect="NA", n="no contractile-SMC cluster recovered (SMC-like cells 26-371 per patient, all classified as modulated)", tier1="yes", inference="not estimable (F2 primary; cell type missing)", estimation="not estimated", estimability="not estimable", note="F2 primary"))
+        dm = E2[E2.celltype == "SMC_modulated"]
+        for k in ["C", "I", "R"]:
+            q = dm[dm.measure == k]
+            if len(q) == 0: continue
+            r = q.iloc[0]
+            rows.append(dict(block="3. Stage: acute dissection (external replicate)", dataset="GSE189795", unit="patient (>=20 modulated SMC)", comparison="acute TAAD vs control (modulated SMC, exploratory substitute)", measure=k, direction=direction(r.g), effect=fmt(r.g, r.ci_low, r.ci_high), n=f"{int(r.n_acute)} vs {int(r.n_ctrl)}", tier1="yes", inference=f"exploratory (exact P = {r.p_exact:.3f}; {int(r.n_assignments)} assignments; BH = {r.p_bh_exploratory:.2f})", estimation=est(r.ci_low, r.ci_high), estimability="limited precision (n small; low per-cell depth)", note="substitute for missing contractile-SMC cluster"))
     for k in ["C", "I", "R", "Hypoxia", "Glycolysis", "Oxidative_stress_NFE2L2", "MYC_ribosome", "p53_DNA_damage", "NFkB_IL6_inflammation"]:
         q = d[d.measure == k]
         if len(q) == 0: continue
