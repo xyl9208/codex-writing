@@ -1,6 +1,6 @@
 {
- "pooled_auc_nested": 0.9039876113046844,
- "accuracy_nested": 0.8557692307692307,
+ "pooled_auc_nested": 0.9012775842044134,
+ "accuracy_nested": 0.8365384615384616,
  "pair_auc_median": 1.0,
- "pair_auc_mean": 0.9419781047805241
+ "pair_auc_mean": 0.9499797077922079
 }
