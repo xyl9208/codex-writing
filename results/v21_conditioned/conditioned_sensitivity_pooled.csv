@@ -1,35 +1,35 @@
-disease,measure,n_cohorts,pooled_beta_unconditioned,ci_unc,pooled_beta_conditioned,ci_cond,retained
-ATAA,C,4,-0.2956501302250986,"-0.84,0.25",-0.2628647286121224,"-0.50,-0.03",yes
-ATAA,Calcium_handling,4,-0.23010566805655672,"-0.85,0.39",-0.5255890585105435,"-0.96,-0.09",yes
-ATAA,Cell_matrix_adhesion,4,0.08760397172119083,"-0.77,0.94",0.18439757548245714,"-0.74,1.11",attenuated/uncertain
-ATAA,ECM_collagen,4,0.641038989792928,"0.25,1.03",0.2918046095365736,"-0.51,1.09",attenuated/uncertain
-ATAA,Glycolysis,4,0.5550128314027931,"0.16,0.95",0.7308915858116726,"-0.38,1.84",attenuated/uncertain
-ATAA,Hypoxia,4,0.5405605294188744,"-0.16,1.24",-1.362416675696102,"-3.48,0.75",attenuated/uncertain
-ATAA,I,4,0.5557437075034536,"-0.05,1.16",-0.1433989047658911,"-1.54,1.25",attenuated/uncertain
-ATAA,IFNG_specific,4,0.70261793030345,"0.32,1.09",-0.24299258490168987,"-1.15,0.67",attenuated/uncertain
-ATAA,IFN_alpha_response,4,0.7802495590107014,"0.40,1.16",0.23917225705350878,"-0.10,0.58",attenuated/uncertain
-ATAA,MHCII_antigen_presentation,4,0.9026723892529536,"0.30,1.50",0.3883077241120758,"-0.43,1.21",attenuated/uncertain
-ATAA,MYC_ribosome,4,0.2177668959482461,"-0.33,0.77",-0.057906649682680736,"-0.72,0.60",attenuated/uncertain
-ATAA,Matrix_degradation,4,0.5460954834390681,"0.15,0.94",0.4633592543253462,"-0.01,0.94",attenuated/uncertain
-ATAA,NFkB_IL6_inflammation,4,0.643768883487916,"0.08,1.20",0.024932877285759887,"-0.93,0.98",attenuated/uncertain
-ATAA,Oxidative_stress_NFE2L2,4,0.20729747283902328,"-0.29,0.71",-0.10406836786542396,"-1.08,0.87",attenuated/uncertain
-ATAA,R,4,0.3075647831837519,"-0.36,0.97",-0.00916996517653367,"-0.94,0.92",attenuated/uncertain
-ATAA,SMC_contractile,4,-0.2956501302250986,"-0.84,0.25",-0.2628647286121224,"-0.50,-0.03",yes
-ATAA,p53_DNA_damage,4,0.3908586757159788,"-0.08,0.86",-0.07048456872186422,"-1.23,1.09",attenuated/uncertain
-TAAD,C,6,-1.4655859101945312,"-1.81,-1.12",-0.4403283935228983,"-0.75,-0.13",yes
-TAAD,Calcium_handling,6,-1.4424388099591734,"-1.79,-1.09",-0.8572397702542943,"-1.45,-0.26",yes
-TAAD,Cell_matrix_adhesion,6,0.18888427911733935,"-0.68,1.06",0.31898473297691166,"-0.52,1.16",attenuated/uncertain
-TAAD,ECM_collagen,6,0.09761321227299731,"-0.73,0.92",-0.003965785529855581,"-1.00,0.99",attenuated/uncertain
-TAAD,Glycolysis,6,1.4717900268446003,"1.14,1.81",1.1490355833938775,"0.29,2.01",yes
-TAAD,Hypoxia,6,1.0720531690818726,"0.55,1.59",1.4116361222807496,"0.76,2.06",yes
-TAAD,I,6,1.413853335532834,"1.01,1.81",1.3325590147817994,"0.64,2.03",yes
-TAAD,IFNG_specific,6,0.5711462559270508,"-0.12,1.26",0.46235073865950965,"0.03,0.89",yes
-TAAD,IFN_alpha_response,6,0.09238528234334248,"-0.91,1.09",-0.5449715883059617,"-1.27,0.18",attenuated/uncertain
-TAAD,MHCII_antigen_presentation,6,-0.45797472458581084,"-1.43,0.52",-0.5542857876392331,"-1.27,0.16",attenuated/uncertain
-TAAD,MYC_ribosome,6,1.2260789015554159,"0.83,1.62",1.0601146180508676,"0.34,1.78",yes
-TAAD,Matrix_degradation,6,-0.12591302622823092,"-0.93,0.68",0.08881898626619046,"-0.63,0.81",attenuated/uncertain
-TAAD,NFkB_IL6_inflammation,6,1.0775041854851515,"0.57,1.59",1.121616020285244,"0.48,1.76",yes
-TAAD,Oxidative_stress_NFE2L2,6,1.3855585010942946,"1.03,1.74",1.2604698733332242,"0.72,1.81",yes
-TAAD,R,6,0.362403891823903,"-0.14,0.87",1.1480082410954535,"-0.08,2.38",attenuated/uncertain
-TAAD,SMC_contractile,6,-1.4655859101945312,"-1.81,-1.12",-0.4403283935228983,"-0.75,-0.13",yes
-TAAD,p53_DNA_damage,6,1.2715761184516001,"0.81,1.73",1.0685263841795913,"0.42,1.72",yes
+disease,measure,n_cohorts,pooled_beta_unconditioned,se_unc,ci_unc,pooled_beta_conditioned,se_cond,ci_cond,retained,retained_rule
+ATAA,C,4,-0.3070352885539054,0.29070599445044476,"-0.88,0.26",-0.2708423668821737,0.11399908383340555,"-0.49,-0.05",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,Calcium_handling,4,-0.20895899669612752,0.31283079187809143,"-0.82,0.40",-0.6381269995495863,0.2911686129575009,"-1.21,-0.07",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,Cell_matrix_adhesion,4,0.0037859468899474383,0.4601948821804936,"-0.90,0.91",-0.04187056729080297,0.5194665003475919,"-1.06,0.98",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,ECM_collagen,4,0.6194984786755277,0.1897782677612496,"0.25,0.99",-0.1474821003694712,0.5551869686877693,"-1.24,0.94",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,Glycolysis,4,0.561255818734873,0.19085757364608916,"0.19,0.94",0.5330748566955791,0.6198345570621508,"-0.68,1.75",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,Hypoxia,4,0.5450505040318238,0.34584959745051486,"-0.13,1.22",-1.4838782119103895,1.381136318958313,"-4.19,1.22",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,I,4,0.577567598064291,0.30284974808214304,"-0.02,1.17",-0.6446120353319043,0.7847823821450015,"-2.18,0.89",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,IFNG_specific,4,0.7199630999768177,0.18457893900736302,"0.36,1.08",-0.7130813026648407,0.5688419137320732,"-1.83,0.40",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,IFN_alpha_response,4,0.7914913442087145,0.1823702404718678,"0.43,1.15",0.26357859825770175,0.31953450353498963,"-0.36,0.89",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,MHCII_antigen_presentation,4,0.8840238308466788,0.3140377233780745,"0.27,1.50",0.3408333450237515,0.4376744076114724,"-0.52,1.20",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,MYC_ribosome,4,0.3075481149366081,0.3083237430345961,"-0.30,0.91",-0.06865618705838626,0.38320214730611724,"-0.82,0.68",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,Matrix_degradation,4,0.5288400337536147,0.19257001148675393,"0.15,0.91",0.34151830990650606,0.3298423742124714,"-0.30,0.99",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,NFkB_IL6_inflammation,4,0.6472458990734602,0.2980320218807777,"0.06,1.23",-0.11945872726190924,0.49897887823473835,"-1.10,0.86",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,Oxidative_stress_NFE2L2,4,0.2686747837470592,0.27717605630587105,"-0.27,0.81",-0.2594657169209177,0.5357836521000721,"-1.31,0.79",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,R,4,0.31200907581543086,0.32325108925025625,"-0.32,0.95",-0.20010193610452034,0.5396981583111414,"-1.26,0.86",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,SMC_contractile,4,-0.3070352885539054,0.29070599445044476,"-0.88,0.26",-0.2708423668821737,0.11399908383340555,"-0.49,-0.05",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+ATAA,p53_DNA_damage,4,0.4359885600280439,0.2515186750299334,"-0.06,0.93",-0.4392664743797152,0.6669349719224149,"-1.75,0.87",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,C,6,-1.4630703778877883,0.15736925265236176,"-1.77,-1.15",-0.42026015642599257,0.13562803273643848,"-0.69,-0.15",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,Calcium_handling,6,-1.4437454596632802,0.158307376630582,"-1.75,-1.13",-0.8610592260605544,0.2569508030651774,"-1.36,-0.36",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,Cell_matrix_adhesion,6,0.1988315839457698,0.44464865055338154,"-0.67,1.07",0.2716940032126529,0.46575617797429636,"-0.64,1.18",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,ECM_collagen,6,0.11446400552350482,0.43190223770552355,"-0.73,0.96",-0.0479061246789267,0.5183907827416038,"-1.06,0.97",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,Glycolysis,6,1.4711730663769202,0.151667559590957,"1.17,1.77",1.0488474035712594,0.43626337797513826,"0.19,1.90",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,Hypoxia,6,1.051981033769587,0.26497112685921703,"0.53,1.57",1.3050457146613914,0.33601875138507725,"0.65,1.96",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,I,6,1.3810515074950906,0.2042561665565776,"0.98,1.78",1.1901584906912064,0.3575934837576126,"0.49,1.89",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,IFNG_specific,6,0.5651655848047946,0.35530453871919265,"-0.13,1.26",0.33771108147986273,0.24191993709695447,"-0.14,0.81",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,IFN_alpha_response,6,0.10675343029392999,0.5223588507138762,"-0.92,1.13",-0.45771712260491104,0.37101150328899635,"-1.18,0.27",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,MHCII_antigen_presentation,6,-0.4270160416207177,0.5143678213962221,"-1.44,0.58",-0.396184229925057,0.3872146294936461,"-1.16,0.36",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,MYC_ribosome,6,1.2174494766304302,0.18125778342214374,"0.86,1.57",0.9543837653958007,0.38729927074471915,"0.20,1.71",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,Matrix_degradation,6,-0.10224047734689484,0.4225677470395036,"-0.93,0.73",0.05260582149957373,0.3418887017206682,"-0.62,0.72",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,NFkB_IL6_inflammation,6,1.0460680113788812,0.26247596755351776,"0.53,1.56",1.0257697620518802,0.3543062291579893,"0.33,1.72",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,Oxidative_stress_NFE2L2,6,1.333277543335982,0.19012837626887583,"0.96,1.71",1.1664512395301259,0.28131369991904365,"0.62,1.72",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,R,6,0.3723209207196077,0.24570846996076315,"-0.11,0.85",1.0934996172415035,0.6033709376664341,"-0.09,2.28",attenuated/uncertain,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,SMC_contractile,6,-1.4630703778877883,0.15736925265236176,"-1.77,-1.15",-0.42026015642599257,0.13562803273643848,"-0.69,-0.15",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96
+TAAD,p53_DNA_damage,6,1.2525272362713324,0.23499017778576758,"0.79,1.71",0.9177251539358535,0.3363924837321576,"0.26,1.58",yes,retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96

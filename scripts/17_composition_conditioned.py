@@ -6,7 +6,9 @@ re-estimated in a linear model that conditions on three pre-specified cell-signa
 Rules: (i) genes shared between the outcome module and any of the three covariate marker sets are removed from the
 outcome module before scoring; (ii) if fewer than 5 genes remain the result is recorded as 'not estimable';
 (iii) unconditioned and conditioned effects (standardised coefficients with 95 % CI) are reported side by side;
-(iv) with <= 3 covariates and n between 8 and 53 per cohort, degrees of freedom are reported.
+(iv) with <= 3 covariates and n between 8 and 53 per cohort, degrees of freedom are reported;
+(v) random-effects pooling across cohorts uses the per-cohort OLS standard errors (bse) directly; the per-cohort CIs
+are t-based (residual df) and are kept for reporting only.
 """
 import os, sys, json, numpy as np, pandas as pd, statsmodels.api as sm
 from scipy import stats
@@ -33,18 +35,20 @@ for c, dis in cohorts.items():
         X0 = sm.add_constant(y_group.values); r0 = sm.OLS(yz.values, X0).fit()
         X1 = sm.add_constant(np.column_stack([y_group.values, cov_scores.loc[yz.index].values])); r1 = sm.OLS(yz.values, X1).fit()
         rows.append(dict(cohort=c, disease=dis, measure=k, status="ok", n=len(yz), df_resid_conditioned=int(r1.df_resid), n_genes_used=int(n_clean.get(k, 0)) if k in n_clean else np.nan, n_genes_removed=n_removed,
-                         beta_unconditioned=r0.params[1], ci_low_unc=r0.conf_int()[1][0], ci_high_unc=r0.conf_int()[1][1], beta_conditioned=r1.params[1], ci_low_cond=r1.conf_int()[1][0], ci_high_cond=r1.conf_int()[1][1],
+                         beta_unconditioned=r0.params[1], se_unconditioned=r0.bse[1], ci_low_unc=r0.conf_int()[1][0], ci_high_unc=r0.conf_int()[1][1], beta_conditioned=r1.params[1], se_conditioned=r1.bse[1], ci_low_cond=r1.conf_int()[1][0], ci_high_cond=r1.conf_int()[1][1],
                          p_unconditioned=r0.pvalues[1], p_conditioned=r1.pvalues[1], max_vif_proxy=float(np.max(np.abs(np.corrcoef(X1[:, 1:].T)[0, 1:])))))
 R = pd.DataFrame(rows); R.to_csv(os.path.join(OUT, "conditioned_sensitivity_per_cohort.csv"), index=False)
 ok = R[R.status == "ok"]
 def rem(g, se):
     g, se = np.asarray(g, float), np.asarray(se, float); w = 1 / se ** 2; yf = np.sum(w * g) / np.sum(w); Q = np.sum(w * (g - yf) ** 2); df = len(g) - 1; C = np.sum(w) - np.sum(w ** 2) / np.sum(w)
     tau2 = max(0, (Q - df) / C) if C > 0 else 0; wr = 1 / (se ** 2 + tau2); y = np.sum(wr * g) / np.sum(wr); s = np.sqrt(1 / np.sum(wr)); return y, s
+RULE = "retained = same sign as pooled unconditioned estimate and |pooled_beta_conditioned / se_cond| > 1.96"
 srows = []
 for (dis, k), d in ok.groupby(["disease", "measure"]):
-    se_u = (d.ci_high_unc - d.ci_low_unc) / 3.92; se_c = (d.ci_high_cond - d.ci_low_cond) / 3.92
-    yu, su = rem(d.beta_unconditioned, se_u); yc_, sc_ = rem(d.beta_conditioned, se_c)
-    srows.append(dict(disease=dis, measure=k, n_cohorts=len(d), pooled_beta_unconditioned=yu, ci_unc=f"{yu-1.96*su:.2f},{yu+1.96*su:.2f}", pooled_beta_conditioned=yc_, ci_cond=f"{yc_-1.96*sc_:.2f},{yc_+1.96*sc_:.2f}", retained=("yes" if np.sign(yc_) == np.sign(yu) and abs(yc_ / sc_) > 1.96 else "attenuated/uncertain")))
+    # pooling uses the per-cohort OLS standard errors (bse), not SEs back-derived from the t-based conf_int() bounds
+    yu, su = rem(d.beta_unconditioned, d.se_unconditioned); yc_, sc_ = rem(d.beta_conditioned, d.se_conditioned)
+    srows.append(dict(disease=dis, measure=k, n_cohorts=len(d), pooled_beta_unconditioned=yu, se_unc=su, ci_unc=f"{yu-1.96*su:.2f},{yu+1.96*su:.2f}", pooled_beta_conditioned=yc_, se_cond=sc_, ci_cond=f"{yc_-1.96*sc_:.2f},{yc_+1.96*sc_:.2f}",
+                      retained=("yes" if np.sign(yc_) == np.sign(yu) and abs(yc_ / sc_) > 1.96 else "attenuated/uncertain"), retained_rule=RULE))
 S = pd.DataFrame(srows); S.to_csv(os.path.join(OUT, "conditioned_sensitivity_pooled.csv"), index=False)
 pd.set_option("display.width", 250); print(S[S.measure.isin(["C", "I", "R", "SMC_contractile", "Calcium_handling", "Glycolysis", "Oxidative_stress_NFE2L2", "MYC_ribosome", "p53_DNA_damage", "NFkB_IL6_inflammation", "IFN_alpha_response", "MHCII_antigen_presentation", "ECM_collagen"])].round(3).to_string(index=False))
 print("\nnot estimable:", R[R.status != "ok"][["cohort", "measure"]].values.tolist()[:10])
