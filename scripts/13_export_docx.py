@@ -15,10 +15,9 @@ IN = sys.argv[1] if len(sys.argv) > 1 else "manuscript.md"; OUTNAME = sys.argv[2
 ZH = IN.endswith("_zh.md")
 lines = open(os.path.join(MS, IN), encoding="utf-8").read().split("\n")
 
-FIGFILES = {1: ["Fig1_study_design.png", "Fig1b_cohort_concordance.png"], 2: ["Fig2_gene_level_comparison.png"], 3: ["Fig3_hallmark_NES_heatmap.png", "Fig3b_pathway_scatter.png"],
-            4: ["Fig4_scRNA_overview.png"], 5: ["Fig5_cell_composition.png"], 6: ["Fig6_sc_validation.png"], 7: ["Fig7_PPI_hubs.png"], 8: ["Fig8_signature_ml.png"]}
+FIGFILES = {1: ["Fig1_evidence_structure.png"], 2: ["Fig2_bulk_programmes.png"], 3: ["Fig3_sc_patient_level.png"], 4: ["Fig4_stage.png"], 5: ["Fig5_within_patient.png"], 6: ["Fig6_programme_organisation.png"]}
 CITE_RE = re.compile(r"(?:Fig\.|Figs\.|图)\s?(\d)")
-TABLE_RE = re.compile(r"(?:Table|表)\s?1\b")
+TABLE_RE = re.compile(r"(?:Table|表)\s?1\b"); TABLE2_RE = re.compile(r"(?:Table|表)\s?2\b")
 SEC_LEGENDS = ("Figure legends", "图注"); SEC_TABLES = ("Tables", "表"); SEC_ADDITIONAL = ("Additional files", "附加文件")
 
 # ---------------------------------------------------------------- collect legends; drop legend/table sections from the body
@@ -68,7 +67,24 @@ def insert_table1():
                 for run in p.runs: run.font.size = Pt(7.5)
     doc.add_paragraph().paragraph_format.space_after = Pt(6)
 
-inserted = set(); table_done = False; first = True; section = None
+def insert_table2():
+    cap = doc.add_paragraph(); r = cap.add_run("表 2 " if ZH else "Table 2 "); r.bold = True
+    cap.add_run("预设比较的证据矩阵（C、I、R；完整表见 Table2_evidence_matrix.csv）" if ZH else "Evidence matrix for the pre-specified comparisons (C, I and R; full table in Table2_evidence_matrix.csv)")
+    t2 = pd.read_csv(os.path.join(MS, "Table2_evidence_matrix_main.csv")).fillna("")
+    cols = ["block", "dataset", "comparison", "measure", "effect", "n", "inference", "estimation", "estimability"]
+    hdr = ["数据块", "数据集", "比较", "指标", "效应 [95% CI]", "n", "推断", "估计", "可估计性"] if ZH else ["Block", "Dataset", "Comparison", "Measure", "Effect [95 % CI]", "n", "Inference", "Estimation", "Estimability"]
+    table = doc.add_table(rows=1, cols=len(cols)); table.style = "Table Grid"
+    for i, c in enumerate(hdr): table.rows[0].cells[i].text = c
+    for _, r in t2.iterrows():
+        cells = table.add_row().cells
+        for i, c in enumerate(cols): cells[i].text = str(r[c])
+    for row in table.rows:
+        for c in row.cells:
+            for p in c.paragraphs:
+                for run in p.runs: run.font.size = Pt(6.5)
+    doc.add_paragraph().paragraph_format.space_after = Pt(6)
+
+inserted = set(); table_done = False; table2_done = False; first = True; section = None
 for line in body:
     line = line.rstrip()
     if not line or line == "---": continue
@@ -88,8 +104,10 @@ for line in body:
     in_main = section not in (None, "Abstract", "摘要")
     if in_main and not table_done and TABLE_RE.search(line):
         insert_table1(); table_done = True
+    if in_main and not table2_done and TABLE2_RE.search(line) and os.path.exists(os.path.join(MS, "Table2_evidence_matrix_main.csv")):
+        insert_table2(); table2_done = True
     if in_main:
         for m in CITE_RE.finditer(line):
             n = int(m.group(1))
             if n in FIGFILES and n not in inserted: insert_figure(n); inserted.add(n)
-out = os.path.join(MS, OUTNAME); doc.save(out); print("saved", out, "| figures embedded:", sorted(inserted), "| table1:", table_done)
+out = os.path.join(MS, OUTNAME); doc.save(out); print("saved", out, "| figures embedded:", sorted(inserted), "| table1:", table_done, "| table2:", table2_done)
