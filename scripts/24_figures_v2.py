@@ -167,7 +167,7 @@ def fig4():
         dd = e[e.measure == k].set_index("contrast").reindex(cons); ax.errorbar(dd.g, y + off, xerr=[np.nan_to_num(dd.g - dd.ci_low), np.nan_to_num(dd.ci_high - dd.g)], fmt="o", color=col, ms=4, capsize=1.5, lw=0.8, label=LAB[k])
         for yi, (c, r) in zip(y + off, dd.iterrows()):
             if not np.isnan(r.g): ax.text(9.7, yi, f"{int(r.n_A)} vs {int(r.n_B)}; {r.positions_A} vs {r.positions_B}".replace("Intima-medium", "IM").replace("Whole", "W"), fontsize=5.3, va="center", color=col)
-    ax.axvline(0, color="k", lw=0.6); ax.set_yticks(y); ax.set_yticklabels([lab[c] for c in cons]); ax.set_xlim(-6, 13.5); ax.set_xlabel("Hedges' g (95 % CI, clipped); estimation only, no inferential test; IM = intima-media, W = whole wall"); ax.legend(frameon=False, fontsize=6.5, loc="lower left"); ax.set_title("GSE222318 contractile SMC: stage contrasts (sampling position confounded with stage)", fontsize=8)
+    ax.axvline(0, color="k", lw=0.6); ax.set_yticks(y); ax.set_yticklabels([lab[c] for c in cons]); ax.set_xlim(-6, 13.5); ax.set_xlabel("Hedges' g (95 % CI, clipped); estimation only, no inferential test; IM = intima-media, W = whole wall"); ax.legend(frameon=False, fontsize=6.5, loc="upper center", bbox_to_anchor=(0.5, -0.14), ncol=3); ax.set_title("GSE222318 contractile SMC: stage contrasts (sampling position confounded with stage)", fontsize=8)
     # (e) GSE189795: contractile SMC if recovered in >= 4 patients, otherwise modulated SMC as an exploratory substitute (primary test not estimable)
     ax = fig.add_subplot(gs[1, 2]); panel(ax, "e", 1.16)
     ct = "SMC_contractile" if (S2.celltype == "SMC_contractile").sum() >= 4 else "SMC_modulated"; d2 = S2[S2.celltype == ct]
