@@ -50,7 +50,7 @@
 
 ### 随机效应 meta 分析与基因类别
 
-每种疾病的 log2 倍数变化以 DerSimonian–Laird 随机效应模型合并（τ² 截断为零；主估计量）[24,25]；Hartung–Knapp–Sidik–Jonkman（HKSJ）校正为敏感性分析，并以完全相同的效应、方差与缺失处理与 statsmodels 逐基因核对（附加文件 5）。仅考虑在 ≥ 75 % 队列中存在的基因。共识差异表达基因（DEG）要求随机效应 FDR < 0.05、≥ 75 % 队列方向一致、≥ 50 % 队列同方向名义 P < 0.05。稳健性以留一队列（LOCO）重分析评估；对 TAAD 另以全部 15 个 4-of-6 队列子集评估以匹配 ATAA 的队列数。疾病间差异以 z_diff = (LFC_TAAD − LFC_ATAA)/√(SE_TAAD² + SE_ATAA²) 检验并做 FDR 校正。当 FDR_diff < 0.05 且该基因为该病共识 DEG 时归为该病富集；在另一病中的零等效性双单侧检验（TOST；|log2FC| < 0.5，90 % CI）增加一个描述性层级（"富集且在另一病中近零"）；0.5 为声明的操作性界值而非经验证的生物学阈值（附加文件 6）。疾病排序与差异排序的预排序 GSEA（gseapy；MSigDB v2024.1 Hallmark、KEGG legacy、Reactome）保留为描述性通路总结 [26–28]。
+每种疾病的 log2 倍数变化以 DerSimonian–Laird 随机效应模型合并（τ² 截断为零；主估计量）[24,25]；Hartung–Knapp–Sidik–Jonkman（HKSJ）校正为敏感性分析。实现以完全相同的效应、方差与缺失处理与 statsmodels（combine_effects，DerSimonian–Laird）逐基因核对；由于 statsmodels 不截断负的 DerSimonian–Laird τ² 而本实现截断，核对时先对 statsmodels 的 τ² 施加同样的截断，再重算权重、合并效应与 Knapp–Hartung 方差。在该共同约定下，全部 23,955 个基因的合并 log2FC、SE、正态 P 与 HKSJ P 在机器精度内一致（最大绝对差 5.9e-15；无非有限值）；statsmodels 未截断的原始输出在 6,789 个（28 %）τ² 为负的基因上与本实现不同，其中 3,620 个为非有限值（附加文件 5）。仅考虑在 ≥ 75 % 队列中存在的基因。共识差异表达基因（DEG）要求随机效应 FDR < 0.05、≥ 75 % 队列方向一致、≥ 50 % 队列同方向名义 P < 0.05。稳健性以留一队列（LOCO）重分析评估；对 TAAD 另以全部 15 个 4-of-6 队列子集评估以匹配 ATAA 的队列数。疾病间差异以 z_diff = (LFC_TAAD − LFC_ATAA)/√(SE_TAAD² + SE_ATAA²) 检验并做 FDR 校正。当 FDR_diff < 0.05 且该基因为该病共识 DEG 时归为该病富集；在另一病中的零等效性双单侧检验（TOST；|log2FC| < 0.5，90 % CI）增加一个描述性层级（"富集且在另一病中近零"）；0.5 为声明的操作性界值而非经验证的生物学阈值（附加文件 6）。疾病排序与差异排序的预排序 GSEA（gseapy；MSigDB v2024.1 Hallmark、KEGG legacy、Reactome）保留为描述性通路总结 [26–28]。
 
 ### 两层模块体系与程序分
 
