@@ -142,4 +142,4 @@ fpr2, tpr2, _ = roc_curve((scv.disease == "TAAD").astype(int), scv.prob_TAAD); a
 ax[2].plot([0, 1], [0, 1], "k:", lw=0.8); ax[2].set_xlabel("1 - specificity"); ax[2].set_ylabel("sensitivity"); ax[2].legend(fontsize=7, frameon=False); ax[2].set_title("TAAD vs ATAA classifier", fontsize=10)
 sns.boxplot(data=r_sc, x="group", y="TAAD_specific", palette=pal, ax=ax[3], fliersize=0); sns.stripplot(data=r_sc, x="group", y="TAAD_specific", hue="subject", size=3, ax=ax[3], palette="tab10")
 ax[3].set_title("GSE318877 micro-regions (direct)", fontsize=10); ax[3].set_ylabel("TAAD-specific score (within-cohort z)"); ax[3].legend(fontsize=6, frameon=False, title="subject", title_fontsize=6)
-fig.tight_layout(); fig.savefig(os.path.join(FIG, "Fig5_signature_ml.png"), dpi=200); fig.savefig(os.path.join(FIG, "Fig5_signature_ml.pdf")); plt.close(fig)
+fig.tight_layout(); fig.savefig(os.path.join(FIG, "Fig8_signature_ml.png"), dpi=200); fig.savefig(os.path.join(FIG, "Fig8_signature_ml.pdf")); plt.close(fig)

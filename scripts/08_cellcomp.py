@@ -92,4 +92,4 @@ for i in range(H.shape[0]):
     for j in range(H.shape[1]):
         if P.iloc[i, j] < 0.05: ax[1].text(j + 0.5, i + 0.5, "*", ha="center", va="center", fontsize=9)
 ax[1].set_xticklabels([f"{c}\n({REG[c]['disease']})" for c in H.columns], rotation=90, fontsize=7); ax[1].set_yticklabels(CTS, fontsize=8); ax[1].axvline(4, color="k", lw=1.5); ax[1].set_ylabel(""); ax[1].set_title("Per-cohort effects (* P<0.05)", fontsize=10)
-fig.tight_layout(); fig.savefig(os.path.join(FIG, "Fig4_cell_composition.png"), dpi=200); fig.savefig(os.path.join(FIG, "Fig4_cell_composition.pdf")); plt.close(fig)
+fig.tight_layout(); fig.savefig(os.path.join(FIG, "Fig5_cell_composition.png"), dpi=200); fig.savefig(os.path.join(FIG, "Fig5_cell_composition.pdf")); plt.close(fig)

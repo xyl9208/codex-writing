@@ -49,4 +49,4 @@ for ax, cl in zip(axes, ["TAAD_specific", "ATAA_specific"]):
     nx.draw_networkx_edges(H, pos, ax=ax, alpha=0.25, width=0.6); nx.draw_networkx_nodes(H, pos, ax=ax, node_color=colors, node_size=sizes, edgecolors="k", linewidths=0.4)
     nx.draw_networkx_labels(H, pos, ax=ax, font_size=7)
     ax.set_title(f"{cl.replace('_', '-')} DEGs: top-40 STRING hubs (red up / blue down in disease)", fontsize=10); ax.axis("off")
-fig.tight_layout(); fig.savefig(os.path.join(FIG, "Fig6_PPI_hubs.png"), dpi=200); fig.savefig(os.path.join(FIG, "Fig6_PPI_hubs.pdf")); plt.close(fig)
+fig.tight_layout(); fig.savefig(os.path.join(FIG, "Fig7_PPI_hubs.png"), dpi=200); fig.savefig(os.path.join(FIG, "Fig7_PPI_hubs.pdf")); plt.close(fig)

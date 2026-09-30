@@ -84,4 +84,4 @@ for ax, cl in zip(axes[:2], ["TAAD_specific", "ATAA_specific"]):
 S = source.loc[[i for i in source.index if not i.startswith("discordant")], order]
 sns.heatmap(S, cmap="viridis", ax=axes[2], cbar_kws=dict(label="fraction of class expression per cell type", shrink=0.5), annot=True, fmt=".2f", annot_kws=dict(size=6))
 axes[2].set_xticklabels(order, rotation=90, fontsize=7); axes[2].set_yticklabels(S.index, fontsize=7, rotation=0); axes[2].set_title("Cellular source of gene classes (control aorta)", fontsize=9)
-fig.tight_layout(); fig.savefig(os.path.join(FIG, "Fig8_sc_validation.png"), dpi=200); fig.savefig(os.path.join(FIG, "Fig8_sc_validation.pdf")); plt.close(fig)
+fig.tight_layout(); fig.savefig(os.path.join(FIG, "Fig6_sc_validation.png"), dpi=200); fig.savefig(os.path.join(FIG, "Fig6_sc_validation.pdf")); plt.close(fig)

@@ -65,7 +65,7 @@ for i, (ds, dis) in enumerate([("GSE155468", "ATAA"), ("GSE213740", "TAAD")]):
     mp.plot(kind="bar", stacked=True, color=[pal[c] for c in order], ax=ax[i + 1], width=0.6, legend=(i == 1))
     ax[i + 1].set_ylabel("fraction of cells"); ax[i + 1].set_title(f"{ds}: {dis} (n={int((p.group==dis).sum())}) vs control (n={int((p.group=='Control').sum())})", fontsize=9); ax[i + 1].tick_params(axis="x", rotation=0)
     if i == 1: ax[i + 1].legend(fontsize=6, frameon=False, bbox_to_anchor=(1.01, 1), loc="upper left")
-fig.tight_layout(); fig.savefig(os.path.join(FIG, "Fig7_scRNA_overview.png"), dpi=200); fig.savefig(os.path.join(FIG, "Fig7_scRNA_overview.pdf")); plt.close(fig)
+fig.tight_layout(); fig.savefig(os.path.join(FIG, "Fig4_scRNA_overview.png"), dpi=200); fig.savefig(os.path.join(FIG, "Fig4_scRNA_overview.pdf")); plt.close(fig)
 sc.settings.figdir = os.path.join(FIG, "sc")
 canon = ["MYH11", "ACTA2", "CNN1", "LMOD1", "MGP", "SPARC", "TNFRSF11B", "COL1A1", "BGN", "LTBP2", "DCN", "LUM", "PDGFRA", "PECAM1", "VWF", "CD68", "C1QA", "CD163", "S100A8", "S100A9", "FCGR3B", "CD3E", "IL7R", "NKG7", "GNLY", "MS4A1", "CD79A", "MZB1", "JCHAIN", "TPSAB1", "KIT"]
 canon = [g for g in canon if g in a.var_names]

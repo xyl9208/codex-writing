@@ -31,6 +31,6 @@
 
 ## 四、文件位置
 
-- 图：`figures/Fig1_study_design.png`、`Fig1b_cohort_concordance.png`、`Fig2_gene_level_comparison.png`、`Fig3_hallmark_NES_heatmap.png`、`Fig3b_pathway_scatter.png`、`Fig4_cell_composition.png`、`Fig5_signature_ml.png`、`Fig6_PPI_hubs.png`、`Fig7_scRNA_overview.png`、`Fig8_sc_validation.png`（均有 PDF 版本）；QC 图在 `figures/qc/`。
+- 图：`figures/Fig1_study_design.png`、`Fig1b_cohort_concordance.png`、`Fig2_gene_level_comparison.png`、`Fig3_hallmark_NES_heatmap.png`、`Fig3b_pathway_scatter.png`、`Fig5_cell_composition.png`、`Fig8_signature_ml.png`、`Fig7_PPI_hubs.png`、`Fig4_scRNA_overview.png`、`Fig6_sc_validation.png`（均有 PDF 版本）；QC 图在 `figures/qc/`。
 - 结果表：`results/meta/`（meta 分析、基因分类、LOCO、直接验证）、`results/pathways/`（GSEA/ORA）、`results/cellcomp/`、`results/ml/`、`results/ppi/`、`results/sc/`、`results/sc_validation/`。
 - 代码：`scripts/00`–`13`，可按 README.md 顺序完整复现。
