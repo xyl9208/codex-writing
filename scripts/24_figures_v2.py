@@ -22,7 +22,7 @@ def panel(ax, letter, dy=1.06): ax.text(-0.1, dy, letter, transform=ax.transAxes
 # ====================================================================== Figure 1
 def fig1():
     rho = pd.read_csv(os.path.join(R, "meta", "cohort_concordance_rho.csv"), index_col=0); S = json.load(open(os.path.join(R, "meta_v2", "summary_v2.json")))
-    fig = plt.figure(figsize=(11, 7.2)); gs = fig.add_gridspec(2, 2, width_ratios=[1.25, 1], height_ratios=[1, 1.05], hspace=0.45, wspace=0.3)
+    fig = plt.figure(figsize=(11, 7.8)); gs = fig.add_gridspec(2, 2, width_ratios=[1.25, 1], height_ratios=[1.2, 1], hspace=0.4, wspace=0.3)
     # (a) evidence structure
     ax = fig.add_subplot(gs[0, :]); ax.set_xlim(0, 10); ax.set_ylim(-0.7, 6.6); ax.axis("off"); panel(ax, "a")
     def box(x, y, w, h, text, fc, fs=7.2, ec="#444444"):
@@ -34,7 +34,7 @@ def fig1():
             ("Ordered dilatation within one cohort\nGSE26155: No (31) < Borderline (6) < Yes (22)", "Unit: patient (intima-media, TAV)", "Exploratory trend (Jonckheere-Terpstra,\npermutation P; BH)", "#f7f3d9")]
     y0 = 5.1
     for i, (a_, b_, c_, fc) in enumerate(rows):
-        y = y0 - i * 1.12; box(0.05, y, 4.3, 1.0, a_, fc, fs=6.8); box(4.5, y, 2.6, 1.0, b_, "#ffffff", fs=6.8); box(7.25, y, 2.7, 1.0, c_, "#ffffff", fs=6.8)
+        y = y0 - i * 1.12; box(0.05, y, 4.3, 1.0, a_, fc, fs=6.5); box(4.5, y, 2.6, 1.0, b_, "#ffffff", fs=6.5); box(7.25, y, 2.7, 1.0, c_, "#ffffff", fs=6.5)
     ax.text(2.2, 6.2, "Data structure", ha="center", fontsize=8, fontweight="bold"); ax.text(5.8, 6.2, "Unit of analysis", ha="center", fontsize=8, fontweight="bold"); ax.text(8.6, 6.2, "Inference status (plan lock after exploration)", ha="center", fontsize=8, fontweight="bold")
     ax.text(5, -0.45, "Programme scores (Tier 1, external definitions): C = SMC contractile module; I = mean of six injury-response modules (hypoxia, glycolysis, oxidative stress/NFE2L2, MYC-ribosome, p53-DNA damage, NF-kB/IL-6); R = I + C", ha="center", fontsize=7, style="italic")
     # (b) concordance heatmap

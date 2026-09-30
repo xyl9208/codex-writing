@@ -47,6 +47,7 @@ def add_runs(par, text):
 
 def insert_figure(n):
     for f in FIGFILES.get(n, []):
+        if not os.path.exists(os.path.join(FIG, f)): print("WARNING: missing figure file", f); continue
         doc.add_picture(os.path.join(FIG, f), width=Inches(6.3)); doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
     p = doc.add_paragraph(); add_runs(p, legends.get(n, f"**{'图' if ZH else 'Fig.'} {n}**")); p.paragraph_format.space_after = Pt(14)
     for r in p.runs: r.font.size = Pt(10)

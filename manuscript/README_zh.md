@@ -1,36 +1,34 @@
-# 研究说明（中文）：升主动脉瘤（ATAA）与急性 A 型主动脉夹层（TAAD）的分子机制差异
+# 研究说明（中文，v2.1）：升主动脉瘤（ATAA）与 A 型主动脉夹层（TAAD）中的收缩程序与损伤应答程序
 
-**目标期刊**：Journal of Translational Medicine（Springer Nature/BMC，JCR Q1，IF≈6）。全文英文稿见 `manuscript.md` 与 `manuscript_JTM.docx`，队列汇总表见 `Table1_cohorts.csv`。
+**目标期刊**：Journal of Translational Medicine。英文稿 `manuscript.md` / `manuscript_JTM.docx`，中文稿 `manuscript_zh.md` / `manuscript_JTM_zh.docx`，数据集表 `Table1_cohorts.csv`，证据矩阵 `Table2_evidence_matrix.csv`（正文版 `Table2_evidence_matrix_main.csv`）。研究方案与分析计划锁定见 `研究方案v2_总体框架.md`、`研究方案v2.1_修订与叙事主线.md`、`研究方案v2.1_附录_统计执行说明.md`。
 
-## 一、研究设计
+## 一、问题与设计（v2.1）
 
-- **数据来源**：2026-09-29 系统检索 GEO，纳入所有人类升/胸主动脉组织"疾病 vs 非病变主动脉"的转录组。
-  - ATAA：4 个 bulk 队列，n=115（GSE26155、GSE140947、GSE235161、GSE202267）
-  - TAAD：6 个 bulk 队列，n=76（GSE52093、GSE153434、GSE98770、GSE294606、GSE267434、GSE147026）
-  - 剔除 GSE190635：其差异表达谱与其他所有夹层队列呈强负相关（ρ −0.37～−0.68），提示 GEO 上传的分组标签可能颠倒。
-  - 独立验证：GSE318877（同一平台内直接比较夹层 vs 扩张的中膜显微区域 RNA-seq，70 个样本）；单细胞 GSE155468（ATAA）+ GSE213740（TAAD），整合后 73,755 个细胞。
-- **统一流程**：基因符号统一 → 每队列差异分析（芯片/FPKM 用 limma-trend，counts 用 DESeq2）→ Stouffer 加权 Z + DerSimonian-Laird 随机效应 meta 分析 → 留一队列（LOCO）稳健性 → 两病基因分类（共享/夹层特异/动脉瘤特异/方向相反，附 z_diff 差异检验）→ GSEA（Hallmark/KEGG/Reactome）与 ORA → 单细胞衍生标志物 ssGSEA 推断细胞组成 → STRING PPI 枢纽 → 对照参照 z 分数 + LOCO 弹性网分类器。
-- **关键处理修正**：GSE98770 从原始 Agilent 文件重处理（GEO 矩阵无信号，重处理后 1323 个 DEG，MYOCD/CXCL14/PI16 下调）；GSE235161 限定蛋白编码基因并重新标准化（rRNA/7SL 主导 FPKM）。
+- **科学问题**：ATAA 与 TAAD 的差异是同一组程序的强度差异，还是收缩、重塑与损伤应答程序的不同组合？仅比较疾病标签无法区分，因此在跨队列比较之外，加入患者级结构：细胞类型内（scRNA 伪 bulk）、病程（急性/亚急性/慢性）、患者内区域（瘤体/瘤颈）与中膜分层、队列内有序扩张程度。
+- **程序分（Tier 1，外部定义，标签无关）**：C = SMC 收缩模块分；I = 六个损伤应答模块（缺氧、糖酵解、氧化应激/NFE2L2、MYC-核糖体、p53-DNA 损伤、NF-κB/IL-6）等权均值；R = I + C 为相对状态量。每个 R 检验同时报告 C 与 I。
+- **推断家族（探索后锁定）**：F1 bulk 队列级（C、I、R 两病差异；Holm）；F2 单细胞患者级（每数据集一个：收缩型 SMC 内 R，精确枚举）；F3 患者内区域（GSE140947 ΔR，精确符号置换）。GSE222318（取材位置与病程混杂）与 GSE318877（3 对 4）仅估计；各模块、其他细胞类型、GSE26155 有序趋势为探索性（BH）。
+- **数据**：bulk 10 队列（ATAA 4 个，63 对 52；TAAD 6 个，41 对 35）；GSE190635 仅作纳入敏感性；scRNA GSE155468、GSE213740、GSE189795、GSE222318；GSE140947 区域；GSE318877 分层；GSE26155 有序扩张（含临界组）。
 
-## 二、主要发现
+## 二、主要结果（真实结果决定叙事）
 
-1. **可重复性不对称**：夹层签名在 6 个队列/4 种平台间高度一致（队列间 ρ 中位数 0.50；LOCO 保留 73–85%），动脉瘤签名弱且依赖队列（ρ 中位数 0.12；去掉 GSE26155 仅保留 9%）。提示单队列动脉瘤"枢纽基因"结论需谨慎。
-2. **两病分子上大部分不同**：全基因组 meta log2FC 相关仅 ρ=0.11；共识 DEG 重叠 137 个（Jaccard 0.056）。
-3. **TAAD 特异（1780 基因）**：SMC 收缩程序丢失（MYOCD −1.60、ACTA2、CNN1、LMOD1、MYH11）；内皮（VWF、PECAM1、PTPRB、TEK）与外膜成纤维（PI16、DCN、APOD、CXCL14）转录本丢失；缺氧/应激（HIF1A、VEGFA、HMOX1、MT2A、CDKN1A）；MYC/mTORC1/E2F、核糖体生物合成、DNA 修复、ROS、UPR 上调；固有炎症（IL6、CXCL8、CCL2、S100A8/A9、SPP1、SERPINE1、TIMP1、MMP14）。PPI 枢纽：AKT1、STAT3、MYC。
-4. **ATAA 特异/富集（230 基因）**：I 型干扰素（OAS1-3、IFIT1-3、MX1/2、CXCL10）、MHC-II 抗原呈递（CD74、HLA-DRA/DPA1/DPB1、RFX5 调控子）、粘附与 ECM（VCAM1、ITGA4、COL1A2、MXRA5）；无 SMC 收缩基因丢失；生物钟基因（BMAL1、NPAS2、PER3、CRY2）下调为新发现。
-5. **共享核心（107 基因 / 15 个 Hallmark）**：TNFα-NF-κB、IL6-JAK-STAT3、缺氧、EMT、TGF-β、补体、血管生成（VEGFA、APLN）、UPR；共同下调 SMC 钙处理基因（RYR2、CASQ1、DES、ACTN2）。MMP2/MMP9 在两病均无稳定改变。
-6. **细胞组成**：TAAD = SMC/成纤维/内皮评分下降 + S100A8/9⁺ 炎性髓系浸润；ATAA = T/NK/浆细胞浸润、无 SMC 丢失；单细胞比例方向一致（ATAA 中 T 细胞 7.9%→46.4%，P=0.024；TAAD 中 S100A8/9⁺ 髓系 4.2%→18.6%）。
-7. **验证**：直接对比队列通路层面 ρ=0.42（P=5e-48），夹层特异基因 60% 方向一致（P=1e-28），夹层特异评分在 4 个中膜区域均升高（P=5e-6）；LOCO 分类器汇总 AUC=0.92。动脉瘤特异的干扰素程序在直接对比队列中未被复现（夹层中膜干扰素活性反而更高），已在文中如实说明。
+1. **可重复性不对称**（图 1）：TAAD 随机效应共识 DEG 1,917（LOCO 保留中位 0.74；4-of-6 子集 1,305–1,992），ATAA 171（LOCO 保留中位 0.28，去 GSE26155 仅 11 %）；HKSJ 下 354 / 0。这是统计可重复性的陈述，不是生物学稳定性的陈述。
+2. **队列水平哪些程序不同**（图 2；F1）：C 在 TAAD −2.11、ATAA −0.34，差值 −1.77，Holm P < 0.001；I 在 TAAD +1.75、ATAA +0.56，差值 +1.19，Holm P = 0.10（临界）；**R 无差异**（+0.20 对 +0.24，P = 0.92）——所有队列都落在 R 不变线附近，两病差异为强度差异。模块级：糖酵解、氧化应激、MYC-核糖体、钙处理在两病间不同（BH ≤ 0.02）；干扰素-α、MHC II 类、ECM-胶原、T/NK/B/浆细胞签名在 ATAA 中升高但与 TAAD 差异不显著（BH 0.08–0.65）。ENO1/MIF 轴基因为 TAAD 富集且在 ATAA 中近零。组成条件化后 TAAD 的 C、I 与代谢/应激模块效应保留，ATAA 的免疫/基质效应变得不确定。
+3. **是否在同一类壁细胞内**（图 3；F2）：收缩型 SMC 内两病 C 均低于对照（g −0.95 / −0.98，区间不含 0），I 无明确变化，**R 主要检验未通过**（精确 P 0.367 / 0.786；全流程核对 0.150 / 0.048）。ATAA SMC 的 MHC II 类分较高（P 0.067，探索性）。每数据集仅 3 例对照，精度有限。
+4. **病程关联**（图 4）：[待填：GSE222318 仅估计；GSE189795 主要检验]。
+5. **患者内与扩张程度**（图 5；F3）：GSE140947 瘤体−瘤颈 ΔR −0.97，符号置换 P 0.188（未通过）；GSE318877 分层梯度无差异（仅估计）；GSE26155 有序扩张：C 下降（ρ −0.35，BH 0.016），I 无趋势（BH 0.86），干扰素-α、MHC II 类、ECM、淋巴/髓系签名升高（BH ≤ 0.03）。
+6. **程序组织方式与可区分性**（图 6；图 S1–S2）：状态对照图区分"获支持"（队列级 C 与代谢/应激差异；队列内 C 随扩张下降、免疫/ECM 随扩张升高）与"尚未确定"（细胞内 R 差异；ATAA 免疫/基质信号是否细胞内在）。嵌套 LOCO 分类器（折内 REM 规则）合并 AUC 0.90，24 对折 AUC 中位 1.00。Tier 2 折内重建签名与 Tier 1 一致，ATAA 主题依赖 GSE26155。
 
-## 三、你需要补充/决定的内容
+**结论表述**：H1（两病以不同方式组织两类程序）在现有患者级数据中**未获支持**（非否定；效能不足）。两病在组织水平的差异主要是收缩丢失与代谢/应激激活的幅度；动脉瘤扩张伴随收缩下降与免疫/基质程序而无夹层的损伤综合分。不使用"解耦已证明""持续性结构核心""修复失代偿"等表述。
 
-- 作者、单位、通讯作者、基金、作者贡献（稿中留有占位符）。
-- 部分数据集无正式发表文献（GSE235161、GSE202267、GSE294606、GSE267434、GSE147026、GSE190635、GSE213740、GSE318877），目前按 GEO 编号引用；投稿前请核对是否已有对应论文并补充引用。
-- 参考文献按 JTM（Vancouver 顺序编号）格式编排，建议投稿前用 EndNote/Zotero 复核每条文献的卷期页码。
-- 建议增加湿实验验证以提高录用概率（JTM 审稿人常要求）：在 ATAA 与 TAAD 手术标本中用 qPCR/免疫组化验证 MYOCD、HMOX1、S100A8/A9、IL6（夹层特异）与 CXCL10、CD74/HLA-DR、OAS1（动脉瘤富集）的表达；或用血浆 IL-6/S100A8/A9/SPP1 做初步循环标志物验证。
+## 三、需要你补充/决定的内容
+
+- 作者、单位、通讯作者、基金、作者贡献（占位符）。
+- 文献 [15]（Adv Sci 2026 图谱，PMID 42107066）、[16]（Inflammation 2026，PMID 42120767）、[19]（GSE318877 论文，PMID 42045332）的作者、卷期页码待按最终版本补全；无关联论文的数据集按 GEO 登录号引用。
+- GSE235161 亚组代码无法映射到论文分组，已在表 1 与局限性中注明；GSE190635 原始 CEL 需 R 环境重新处理，本环境不可用。
+- 投稿前建议：若能取得 Adv Sci 2026 图谱数据（CNP0007139，需申请），可在 80 例患者级数据中复核 F2；若有本院标本，qPCR/免疫组化验证收缩模块（MYH11、ACTA2、MYOCD）与代谢/应激模块（ENO1、HK2、HMOX1、MT2A）在两病中的幅度差异。
 
 ## 四、文件位置
 
-- 图：`figures/Fig1_study_design.png`、`Fig1b_cohort_concordance.png`、`Fig2_gene_level_comparison.png`、`Fig3_hallmark_NES_heatmap.png`、`Fig3b_pathway_scatter.png`、`Fig5_cell_composition.png`、`Fig8_signature_ml.png`、`Fig7_PPI_hubs.png`、`Fig4_scRNA_overview.png`、`Fig6_sc_validation.png`（均有 PDF 版本）；QC 图在 `figures/qc/`。
-- 结果表：`results/meta/`（meta 分析、基因分类、LOCO、直接验证）、`results/pathways/`（GSEA/ORA）、`results/cellcomp/`、`results/ml/`、`results/ppi/`、`results/sc/`、`results/sc_validation/`。
-- 代码：`scripts/00`–`13`，可按 README.md 顺序完整复现。
+- 主图：`figures/Fig1_evidence_structure.png`、`Fig2_bulk_programmes.png`、`Fig3_sc_patient_level.png`、`Fig4_stage.png`、`Fig5_within_patient.png`、`Fig6_programme_organisation.png`（均有 PDF）；补充图：`FigS_tier2_fold_internal.png`、`FigS_nested_LOCO_matrix.png`、`FigS_conditioned_sensitivity.png`；v1 探索阶段图在 `figures/v1/`；QC 在 `figures/qc/`。
+- 结果表：`results/meta_v2/`（REM meta、类别 v2、HKSJ 核对、LOCO、4-of-6）、`results/modules_v21/`（Tier 1 成员表、Tier 2 改名表）、`results/v21_bulk/`（F1 与 GSE318877 患者级估计）、`results/v21_sc/`（F2）、`results/v21_stage/`（GSE222318 估计、GSE189795 检验）、`results/v21_within/`（GSE140947、GSE318877 分层、GSE26155 有序趋势含 BH）、`results/v21_conditioned/`（A7）、`results/v21_tier2_loco/`（Tier 2 折内评价）、`results/ml/`（嵌套 LOCO）。
+- 代码：`scripts/00`–`13`（v1 流程）、`14`（REM meta v2）、`14b`（HKSJ 核对）、`07c`（对照细胞标志）、`19`（Tier 1 冻结）、`v21_lib.py`（共享评分与精确检验）、`21`（F1）、`20`（F2）、`18`（病程）、`16`（患者内/分层/有序）、`17`（组成条件化）、`09b`（嵌套 LOCO）、`22`（Tier 2 折内）、`23`（表 2）、`24`（图 1–6 与补充图）、`13`（Word 导出）。
